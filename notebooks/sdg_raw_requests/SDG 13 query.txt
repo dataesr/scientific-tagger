@@ -1,0 +1,104 @@
+Case [Code ASJC]
+WHEN "3103" then "0"
+
+
+ELSE
+
+
+
+(
+
+
+if(
+(
+( [Code ASJC]="2300" OR [Code ASJC]="2301" OR [Code ASJC]="2302" OR [Code ASJC]="2303" OR [Code ASJC]="2304" OR [Code ASJC]="2305" OR [Code ASJC]="2306" OR [Code ASJC]="2307" OR [Code ASJC]="2308" OR [Code ASJC]="2309" OR [Code ASJC]="2310" OR [Code ASJC]="2311" OR [Code ASJC]="2312")
+AND (CONTAINS([TI-ABS-KW], "climate") OR CONTAINS([TI-ABS-KW], "atmospher") OR CONTAINS([TI-ABS-KW], "climatic"))
+)
+OR
+([Code ASJC]="1902" OR [Code ASJC]="2306")
+
+OR
+
+(
+CONTAINS([TI-ABS-KW], "climate action")
+ OR CONTAINS([TI-ABS-KW], "climate adaptation")
+ OR CONTAINS([TI-ABS-KW], "climate change adaptation")
+ OR CONTAINS([TI-ABS-KW], "climate change")
+ OR CONTAINS([TI-ABS-KW], "climate capitalism")
+  OR CONTAINS([TI-ABS-KW], "greenhouse gas")
+    OR CONTAINS([TI-ABS-KW], "greenhouse effect")
+  OR CONTAINS([TI-ABS-KW], "extreme events")
+  OR CONTAINS([TI-ABS-KW], "kyoto protocol")
+  OR CONTAINS([TI-ABS-KW], "permafrost thaw")
+    OR CONTAINS([TI-ABS-KW], "permafrost melt")
+    OR CONTAINS([TI-ABS-KW], "permafrost degradation")
+  OR CONTAINS([TI-ABS-KW], "thawing permafrost")
+  OR CONTAINS([TI-ABS-KW], "melting permafrost")
+ OR CONTAINS([TI-ABS-KW], " radiative forcing")
+
+   OR CONTAINS([TI-ABS-KW], " climate forcing")
+ OR CONTAINS([TI-ABS-KW], "ipcc")
+ OR CONTAINS([TI-ABS-KW], "Intergovernmental Panel on Climate Change")
+ OR CONTAINS([TI-ABS-KW], "climate effect")
+ OR CONTAINS([TI-ABS-KW], "climate effects")
+ OR CONTAINS([TI-ABS-KW], "climate equity")
+ OR CONTAINS([TI-ABS-KW], "climate feedback")
+ OR CONTAINS([TI-ABS-KW], "climate finance")
+ OR CONTAINS([TI-ABS-KW], "climate change financing")
+ OR CONTAINS([TI-ABS-KW], "climate forcing")
+  OR CONTAINS([TI-ABS-KW], "climate forecast")
+    OR CONTAINS([TI-ABS-KW], "climate-economy model")
+	OR CONTAINS([TI-ABS-KW], "climate and in environmental change")
+ OR CONTAINS([TI-ABS-KW], "climate governance")
+ OR CONTAINS([TI-ABS-KW], "climate impact")
+ OR CONTAINS([TI-ABS-KW], "climate impacts")
+ OR CONTAINS([TI-ABS-KW], "climate issues")
+ OR CONTAINS([TI-ABS-KW], "climate investment")
+  OR CONTAINS([TI-ABS-KW], "climate and energy analysis")
+  OR CONTAINS([TI-ABS-KW], "climate and energy analyses")
+    OR CONTAINS([TI-ABS-KW], "climate goal")
+
+ OR CONTAINS([TI-ABS-KW], "climate justice")
+ OR CONTAINS([TI-ABS-KW], "climate mitigation")
+ OR CONTAINS([TI-ABS-KW], "climate model")
+ OR CONTAINS([TI-ABS-KW], "climate models")
+ OR CONTAINS([TI-ABS-KW], "climate modeling")
+ OR CONTAINS([TI-ABS-KW], "climate modelling")
+ OR CONTAINS([TI-ABS-KW], "climate negotiation")
+ OR CONTAINS([TI-ABS-KW], "climate negotiations")
+ OR CONTAINS([TI-ABS-KW], "climate policy")
+ OR CONTAINS([TI-ABS-KW], "climate policies")
+ OR CONTAINS([TI-ABS-KW], "climate risk")
+ OR CONTAINS([TI-ABS-KW], "climate risks")
+ OR CONTAINS([TI-ABS-KW], "climate services")
+ OR CONTAINS([TI-ABS-KW], "climate service")
+ OR CONTAINS([TI-ABS-KW], "climate prediction")
+ OR CONTAINS([TI-ABS-KW], "climate predictions")
+ OR CONTAINS([TI-ABS-KW], "climate projection")
+ OR CONTAINS([TI-ABS-KW], "climate projections")
+ OR CONTAINS([TI-ABS-KW], "climate simulation")
+ OR CONTAINS([TI-ABS-KW], "climate simulations")
+ OR CONTAINS([TI-ABS-KW], "climate signal")
+ OR CONTAINS([TI-ABS-KW], "climate signals")
+ OR CONTAINS([TI-ABS-KW], "climate tipping point")
+ OR CONTAINS([TI-ABS-KW], "ecoclimatology")
+ OR CONTAINS([TI-ABS-KW], "eco-climatology")
+ OR CONTAINS([TI-ABS-KW], "Green Climate Fund")
+ OR CONTAINS([TI-ABS-KW], "regional climate")
+ OR CONTAINS([TI-ABS-KW], "regional climates")
+ OR CONTAINS([TI-ABS-KW], "climate smart")
+ OR CONTAINS([TI-ABS-KW], "global warming")
+ OR CONTAINS([TI-ABS-KW], "Global atmospheric changes")
+ OR CONTAINS([TI-ABS-KW], "unfccc")
+ OR CONTAINS([TI-ABS-KW], "United Nations Framework Convention on Climate Change") 
+ )
+
+
+
+
+)
+AND NOT [Astronomy]
+
+then "SDG13" else "0" END)
+
+END

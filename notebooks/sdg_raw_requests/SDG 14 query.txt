@@ -1,0 +1,146 @@
+IF
+(
+([Code ASJC]="1910" OR [Code ASJC]="1104")
+
+
+OR
+
+
+(CONTAINS([TI-ABS-KW], "life below water" )
+ OR CONTAINS([TI-ABS-KW], "oceanic circulation model")
+ OR CONTAINS([TI-ABS-KW], "Guidelines on the Transfer of Marine Technology")
+ OR CONTAINS([TI-ABS-KW], "oceanic circulation models")
+ OR CONTAINS([TI-ABS-KW], "oceanic circulation modelling")
+ OR CONTAINS([TI-ABS-KW], "oceanic circulation modeling")
+ OR CONTAINS([TI-ABS-KW], "coral bleach")
+ OR CONTAINS([TI-ABS-KW], "coral bleaching")
+ OR CONTAINS([TI-ABS-KW], "ice-ocean" )
+ OR CONTAINS([TI-ABS-KW], "mangrove ecosystem")
+ OR CONTAINS([TI-ABS-KW], "marine protected area")
+ OR CONTAINS([TI-ABS-KW], "marine protected areas")
+ OR CONTAINS([TI-ABS-KW], "marine conservation")
+ OR CONTAINS([TI-ABS-KW], "marine land slide")
+ OR CONTAINS([TI-ABS-KW], "marine pollution")
+ OR CONTAINS([TI-ABS-KW], "marine environment")
+ OR CONTAINS([TI-ABS-KW], "United Nations Convention on the Law of the Sea")
+ OR CONTAINS([TI-ABS-KW], "unclos")
+ OR CONTAINS([TI-ABS-KW], "Law of the Sea")
+ OR CONTAINS([TI-ABS-KW], "marine quota")
+ OR CONTAINS([TI-ABS-KW], "fishing quota")
+ OR CONTAINS([TI-ABS-KW], "marine biodiversity")
+ OR CONTAINS([TI-ABS-KW], "marine economy")
+ OR CONTAINS([TI-ABS-KW], "marine policy")
+ OR CONTAINS([TI-ABS-KW], "marine resource")
+ OR CONTAINS([TI-ABS-KW], "marine debris")
+ 
+ 
+  OR CONTAINS([TI-ABS-KW], "marine debris")
+ 
+  OR CONTAINS([TI-ABS-KW], "sea-level rise")
+  OR CONTAINS([TI-ABS-KW], "sea level rise")
+ OR CONTAINS([TI-ABS-KW], "marine reserves")
+ OR CONTAINS([TI-ABS-KW], "marine reserve")
+ OR CONTAINS([TI-ABS-KW], "ocean acidification")
+  OR CONTAINS([TI-ABS-KW], "marine acidity")
+ OR CONTAINS([TI-ABS-KW], "sea acidification")
+ OR CONTAINS([TI-ABS-KW], "sustainable use of oceans")
+ OR CONTAINS([TI-ABS-KW], "sustainable use of the oceans")
+ OR (CONTAINS([TI-ABS-KW], "acidification") AND CONTAINS([TI-ABS-KW], "seawater" ))
+ OR CONTAINS([TI-ABS-KW], "coastal ecosystem")
+ OR CONTAINS([TI-ABS-KW], "coastal water")
+ OR CONTAINS([TI-ABS-KW], "marine ecosystem")
+ OR CONTAINS([TI-ABS-KW], "productive ocean")
+ OR CONTAINS([TI-ABS-KW], "healthy ocean")
+ OR CONTAINS([TI-ABS-KW], "World Trade Organization fisheries")
+ OR CONTAINS([TI-ABS-KW], "World Trade Organization on fisheries")
+ OR CONTAINS([TI-ABS-KW], "oceans and seas")
+ ) 
+ OR
+(
+
+ (STARTSWITH([Code ASJC],"34") OR STARTSWITH([Code ASJC],"15") OR STARTSWITH([Code ASJC],"16") OR STARTSWITH([Code ASJC],"17") OR STARTSWITH([Code ASJC],"19") OR STARTSWITH([Code ASJC],"21") OR STARTSWITH([Code ASJC],"22") OR STARTSWITH([Code ASJC],"23") OR STARTSWITH([Code ASJC],"25") OR STARTSWITH([Code ASJC],"26") OR STARTSWITH([Code ASJC],"31") OR STARTSWITH([Code ASJC],"12") OR STARTSWITH([Code ASJC],"14") OR STARTSWITH([Code ASJC],"18") OR STARTSWITH([Code ASJC],"20") OR STARTSWITH([Code ASJC],"32") OR STARTSWITH([Code ASJC],"33") OR STARTSWITH([Code ASJC],"10") OR STARTSWITH([Code ASJC],"11") OR [Code ASJC]="unknown" ) 
+
+AND
+
+(
+
+(CONTAINS([TI-ABS-KW], "marine")
+ OR CONTAINS([TI-ABS-KW], "submarine")
+ OR CONTAINS([TI-ABS-KW], "maritime")
+ OR CONTAINS([TI-ABS-KW], "ocean")
+ OR CONTAINS([TI-ABS-KW], "oceans")
+ OR CONTAINS([TI-ABS-KW], " sea.")
+ OR CONTAINS([TI-ABS-KW], " sea,")
+ OR CONTAINS([TI-ABS-KW], " sea;")
+ OR CONTAINS([TI-ABS-KW], " sea:")
+ OR CONTAINS([TI-ABS-KW], " sea ")
+ OR CONTAINS([TI-ABS-KW], " seas.")
+ OR CONTAINS([TI-ABS-KW], " seas,")
+ OR CONTAINS([TI-ABS-KW], " seas;")
+ OR CONTAINS([TI-ABS-KW], " seas:")
+ OR CONTAINS([TI-ABS-KW], " seas ")
+ OR CONTAINS([TI-ABS-KW], " lake ")
+ OR CONTAINS([TI-ABS-KW], " lake.")
+ OR CONTAINS([TI-ABS-KW], " lake,")
+ OR CONTAINS([TI-ABS-KW], " lake;")
+ OR CONTAINS([TI-ABS-KW], " lake:")
+ OR CONTAINS([TI-ABS-KW], " lake:")
+ OR CONTAINS([TI-ABS-KW], "delta")
+ OR CONTAINS([TI-ABS-KW], "wetland")
+ OR CONTAINS([TI-ABS-KW], "river")
+  OR CONTAINS([TI-ABS-KW], "fluvial")
+ OR CONTAINS([TI-ABS-KW], "mangrove" ) 
+  OR CONTAINS([TI-ABS-KW], "estuary" ) 
+   OR CONTAINS([TI-ABS-KW], "estuaries" ) 
+  OR CONTAINS([TI-ABS-KW], "estuarine" ) 
+ 
+ )
+ AND (
+ CONTAINS([TI-ABS-KW], "water cycle")
+ OR CONTAINS([TI-ABS-KW], "water cycles")
+  OR CONTAINS([TI-ABS-KW], "plastic")
+    OR CONTAINS([TI-ABS-KW], "litter")
+	    OR CONTAINS([TI-ABS-KW], "anthropogenic particles")
+	
+ OR CONTAINS([TI-ABS-KW], "biogeochemical cycle")
+ OR CONTAINS([TI-ABS-KW], "biogeochemical cycles")
+ OR CONTAINS([TI-ABS-KW], "sustainable aquaculture")
+ OR CONTAINS([TI-ABS-KW], "eutrophicat")
+ OR CONTAINS([TI-ABS-KW], "coastal management")
+ OR CONTAINS([TI-ABS-KW], "coastal habitat")
+ OR CONTAINS([TI-ABS-KW], "coastal habitats")
+ OR CONTAINS([TI-ABS-KW], "fishery")
+ OR CONTAINS([TI-ABS-KW], "fisheries")
+ OR CONTAINS([TI-ABS-KW], "overfishing")
+ OR CONTAINS([TI-ABS-KW], "farmed acquatic animal") OR CONTAINS([TI-ABS-KW], "fish biomass") OR CONTAINS([TI-ABS-KW], "fish farming") OR CONTAINS([TI-ABS-KW], "fish stocking") OR CONTAINS([TI-ABS-KW], "mariculture") 
+  OR CONTAINS([TI-ABS-KW], "unregulated fishing")
+      OR CONTAINS([TI-ABS-KW], "unreported fishing")
+   
+         OR CONTAINS([TI-ABS-KW], "restore fish stock")
+    OR CONTAINS([TI-ABS-KW], "illegal fishing")
+ OR CONTAINS([TI-ABS-KW], "sustainable yield")
+ OR CONTAINS([TI-ABS-KW], "ecotourism")
+ OR CONTAINS([TI-ABS-KW], "sustainable tourism")
+ OR CONTAINS([TI-ABS-KW], "community based conservation")
+ OR CONTAINS([TI-ABS-KW], "community-based conservation")
+ OR CONTAINS([TI-ABS-KW], "nutrient runoff")
+ OR CONTAINS([TI-ABS-KW], "destructive fishing")
+ OR CONTAINS([TI-ABS-KW], "species richness")
+ OR CONTAINS([TI-ABS-KW], "species diversity")
+ OR CONTAINS([TI-ABS-KW], "diversity of species")
+ OR CONTAINS([TI-ABS-KW], "diversity of the species")
+ OR CONTAINS([TI-ABS-KW], "traditional ecological knowledge")
+ OR CONTAINS([TI-ABS-KW], "small Island development states")
+)
+)
+)
+
+ 
+ )
+ 
+ AND NOT [Astronomy]
+ 
+ THEN "SDG14" ELSE "0" END
+
+ 
+

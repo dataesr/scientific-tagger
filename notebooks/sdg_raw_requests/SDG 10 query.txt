@@ -1,0 +1,84 @@
+IF (
+
+
+(([Code ASJC]="3312" OR [Code ASJC]="3317" OR [Code ASJC]="3320" OR [Code ASJC]="3305" OR STARTSWITH([Code ASJC],"20")) AND (CONTAINS([TI-ABS-KW], "migration") OR CONTAINS([TI-ABS-KW], "immigration") OR CONTAINS([TI-ABS-KW], "emigration") OR CONTAINS([TI-ABS-KW], "migrant")))
+
+
+OR
+
+
+
+(
+(CONTAINS([TI-ABS-KW], "equality") AND (CONTAINS([TI-ABS-KW], "economic")
+ OR CONTAINS([TI-ABS-KW], "financial")
+ OR CONTAINS([TI-ABS-KW], "socio-economic")
+ OR CONTAINS([TI-ABS-KW], "socioeconomic")))
+ 
+ OR ((CONTAINS([TI-ABS-KW], "inequality")
+ OR CONTAINS([TI-ABS-KW], "inequalities")) AND (CONTAINS([TI-ABS-KW], "economic")
+ OR CONTAINS([TI-ABS-KW], "financial")
+ OR CONTAINS([TI-ABS-KW], "socio-economic")
+ OR CONTAINS([TI-ABS-KW], "socioeconomic")))
+ 
+ OR CONTAINS([TI-ABS-KW], "economic reform policy")
+ OR CONTAINS([TI-ABS-KW], "economic reform policies")
+ OR CONTAINS([TI-ABS-KW], "inequality among countries")
+ OR CONTAINS([TI-ABS-KW], "inequalities among countries")
+ OR CONTAINS([TI-ABS-KW], "World Trade Organization agreements")
+ OR CONTAINS([TI-ABS-KW], "inequalities of outcome")
+ OR CONTAINS([TI-ABS-KW], "inequality of outcome")
+ OR CONTAINS([TI-ABS-KW], "outcome inequality")
+ OR CONTAINS([TI-ABS-KW], "outcome inequalities")
+ OR CONTAINS([TI-ABS-KW], "political inclusion")
+ OR CONTAINS([TI-ABS-KW], "economic inclusion")
+ OR CONTAINS([TI-ABS-KW], "social inclusion")
+ OR CONTAINS([TI-ABS-KW], "social protection policy")
+ OR CONTAINS([TI-ABS-KW], "social protection policies")
+ OR CONTAINS([TI-ABS-KW], "foreign direct investment")
+ OR CONTAINS([TI-ABS-KW], "development gap")
+ OR CONTAINS([TI-ABS-KW], "development gaps")
+ OR CONTAINS([TI-ABS-KW], "migrant remittance")
+ OR CONTAINS([TI-ABS-KW], "responsible migration")
+ OR CONTAINS([TI-ABS-KW], "migration policy")
+ OR CONTAINS([TI-ABS-KW], "migration policies")
+ OR CONTAINS([TI-ABS-KW], "north-south divide")
+ OR CONTAINS([TI-ABS-KW], "social exclusion")
+ OR CONTAINS([TI-ABS-KW], "economic marginalization")
+ OR CONTAINS([TI-ABS-KW], "economic marginalisation")
+ OR CONTAINS([TI-ABS-KW], "income inequality")
+ OR CONTAINS([TI-ABS-KW], "income inequalities")
+ OR CONTAINS([TI-ABS-KW], "discriminatory law")
+ OR CONTAINS([TI-ABS-KW], "discriminatory policies")
+ OR CONTAINS([TI-ABS-KW], "discriminatory policy")
+ OR CONTAINS([TI-ABS-KW], "wage inequality")
+ OR CONTAINS([TI-ABS-KW], "wage inequalities")
+ OR CONTAINS([TI-ABS-KW], "income inequality")
+ OR CONTAINS([TI-ABS-KW], "income inequalities")
+ OR CONTAINS([TI-ABS-KW], "economic empowerment")
+ OR CONTAINS([TI-ABS-KW], "economic transformation")
+ OR CONTAINS([TI-ABS-KW], "differential treatment for developing countries")
+ OR
+((CONTAINS([TI-ABS-KW], "global market") OR CONTAINS([TI-ABS-KW], "international market")) AND (CONTAINS([TI-ABS-KW], "empowerment") OR CONTAINS([TI-ABS-KW], "regulation")))
+
+OR (
+(CONTAINS([TI-ABS-KW], "financial flows")
+ OR CONTAINS([TI-ABS-KW], "decision-making")
+ OR CONTAINS([TI-ABS-KW], "enhanced representation")
+ OR CONTAINS([TI-ABS-KW], "global international economy")
+ OR CONTAINS([TI-ABS-KW], "global economy")
+ OR CONTAINS([TI-ABS-KW], "global value chain")
+ OR CONTAINS([TI-ABS-KW], "financial institutions")
+ OR CONTAINS([TI-ABS-KW], "international economic")) AND 
+
+(CONTAINS([TI-ABS-KW], "Africa") OR CONTAINS([TI-ABS-KW], "least developed countries") OR CONTAINS([TI-ABS-KW], "landlocked country") OR CONTAINS([TI-ABS-KW], "developing country")
+ OR CONTAINS([TI-ABS-KW], "landlocked countries") OR CONTAINS([TI-ABS-KW], "developing countries") OR CONTAINS([TI-ABS-KW], "small island developing States") OR [DevCountries]
+ )
+ )
+
+
+ 
+)
+)
+THEN "SDG10" ELSE "0" END
+
+

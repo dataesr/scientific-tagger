@@ -1,0 +1,104 @@
+Case [Code ASJC]
+WHEN "3103" then "0"
+
+
+ELSE
+
+
+
+(
+
+if(
+((CONTAINS([TI-ABS-KW], "sustainable cities and communities"))
+
+OR
+
+( [Code ASJC]="3322"))
+
+OR
+(
+(CONTAINS([TI-ABS-KW], " city ")  OR CONTAINS([TI-ABS-KW], " city.")  OR CONTAINS([TI-ABS-KW], " city,")  OR CONTAINS([TI-ABS-KW], " city;")  OR CONTAINS([TI-ABS-KW], " city:")  
+ OR CONTAINS([TI-ABS-KW], " cities ")  OR CONTAINS([TI-ABS-KW], " cities.")  OR CONTAINS([TI-ABS-KW], " cities,")  OR CONTAINS([TI-ABS-KW], " cities;")  OR CONTAINS([TI-ABS-KW], " cities:") 
+
+OR CONTAINS([TI-ABS-KW], "human settlement") OR CONTAINS([TI-ABS-KW], "human settlements") OR CONTAINS([TI-ABS-KW], "urban") OR CONTAINS([TI-ABS-KW], "metropolitan") OR CONTAINS([TI-ABS-KW], "metropole") OR CONTAINS([TI-ABS-KW], "town") OR CONTAINS([TI-ABS-KW], "municipal") OR CONTAINS([TI-ABS-KW], "municipality") OR CONTAINS([TI-ABS-KW], "municipalities") )
+AND
+([Code ASJC]="2311" OR [Code ASJC]="3305" OR [Code ASJC]="3313")
+)
+
+OR
+(
+(CONTAINS([TI-ABS-KW], " city ")  OR CONTAINS([TI-ABS-KW], " city.")  OR CONTAINS([TI-ABS-KW], " city,")  OR CONTAINS([TI-ABS-KW], " city;")  OR CONTAINS([TI-ABS-KW], " city:")  
+ OR CONTAINS([TI-ABS-KW], " cities ")  OR CONTAINS([TI-ABS-KW], " cities.")  OR CONTAINS([TI-ABS-KW], " cities,")  OR CONTAINS([TI-ABS-KW], " cities;")  OR CONTAINS([TI-ABS-KW], " cities:") 
+OR CONTAINS([TI-ABS-KW], "human settlement") OR CONTAINS([TI-ABS-KW], "human settlements") OR CONTAINS([TI-ABS-KW], "urban") OR CONTAINS([TI-ABS-KW], "metropolitan") OR CONTAINS([TI-ABS-KW], "metropole") OR CONTAINS([TI-ABS-KW], "town") OR CONTAINS([TI-ABS-KW], "municipal") OR CONTAINS([TI-ABS-KW], "municipality") OR CONTAINS([TI-ABS-KW], "municipalities") ) 
+AND ( 
+CONTAINS([TI-ABS-KW], "gentrification") 
+OR CONTAINS([TI-ABS-KW], "congestion") 
+OR CONTAINS([TI-ABS-KW], "habitat") 
+OR CONTAINS([TI-ABS-KW], "city planning")
+OR CONTAINS([TI-ABS-KW], "transportation") 
+OR CONTAINS([TI-ABS-KW], "public transport") 
+OR CONTAINS([TI-ABS-KW], "housing") 
+OR CONTAINS([TI-ABS-KW], "slum") 
+OR CONTAINS([TI-ABS-KW], "sendai framework") 
+OR CONTAINS([TI-ABS-KW], "Disaster Risk Reduction") 
+OR CONTAINS([TI-ABS-KW], "DRR") 
+OR CONTAINS([TI-ABS-KW], "smart city") 
+OR CONTAINS([TI-ABS-KW], "smart cities") 
+OR CONTAINS([TI-ABS-KW], "resilient building") 
+OR CONTAINS([TI-ABS-KW], "resilient buildings") 
+OR CONTAINS([TI-ABS-KW], "sustainable building") 
+OR CONTAINS([TI-ABS-KW], "sustainable development") 
+OR CONTAINS([TI-ABS-KW], "green roof")
+OR CONTAINS([TI-ABS-KW], "sustainable buildings")
+OR CONTAINS([TI-ABS-KW], "sustainable construction") 
+OR CONTAINS([TI-ABS-KW], "building design") 
+OR CONTAINS([TI-ABS-KW], "buildings design") 
+OR CONTAINS([TI-ABS-KW], "urbanisation") 
+OR CONTAINS([TI-ABS-KW], "urbanization") 
+OR CONTAINS([TI-ABS-KW], "zero energy building") 
+OR CONTAINS([TI-ABS-KW], "zero energy buildings") 
+OR CONTAINS([TI-ABS-KW], "zero-energy building") 
+OR CONTAINS([TI-ABS-KW], "zero-energy buildings") 
+OR CONTAINS([TI-ABS-KW], "zero net energy building")
+OR CONTAINS([TI-ABS-KW], "net-zero energy building")
+OR CONTAINS([TI-ABS-KW], "net zero building")
+OR CONTAINS([TI-ABS-KW], "zero-net energy building")
+OR CONTAINS([TI-ABS-KW], "net zero energy building")
+OR CONTAINS([TI-ABS-KW], "net-zero building")
+OR CONTAINS([TI-ABS-KW], "green building")
+OR CONTAINS([TI-ABS-KW], "basic service") 
+OR CONTAINS([TI-ABS-KW], "basic services") 
+OR CONTAINS([TI-ABS-KW], "governance") 
+OR CONTAINS([TI-ABS-KW], "citizen participation") 
+OR CONTAINS([TI-ABS-KW], "collaborative planning") 
+OR CONTAINS([TI-ABS-KW], "participatory planning") 
+OR CONTAINS([TI-ABS-KW], "inclusiveness") 
+OR CONTAINS([TI-ABS-KW], "cultural heritage") 
+OR CONTAINS([TI-ABS-KW], "natural heritage") 
+OR CONTAINS([TI-ABS-KW], "UNESCO") 
+OR CONTAINS([TI-ABS-KW], "disaster") OR CONTAINS([TI-ABS-KW], "flood") OR CONTAINS([TI-ABS-KW], " storm") OR CONTAINS([TI-ABS-KW], "hurricane") OR CONTAINS([TI-ABS-KW], "water-related hazard") OR CONTAINS([TI-ABS-KW], "water related hazard")
+OR CONTAINS([TI-ABS-KW], "ecological footprint") 
+OR CONTAINS([TI-ABS-KW], "environmental footprint") 
+OR CONTAINS([TI-ABS-KW], "waste") 
+OR CONTAINS([TI-ABS-KW], "wastewater")
+OR CONTAINS([TI-ABS-KW], "pollution") 
+OR CONTAINS([TI-ABS-KW], "pollutant") 
+OR CONTAINS([TI-ABS-KW], "waste water") 
+OR CONTAINS([TI-ABS-KW], "water quality") 
+OR CONTAINS([TI-ABS-KW], "quality of the water") 
+OR CONTAINS([TI-ABS-KW], "sewage") 
+OR CONTAINS([TI-ABS-KW], "sewer") 
+OR CONTAINS([TI-ABS-KW], "water management")
+OR CONTAINS([TI-ABS-KW], "recycling") 
+OR CONTAINS([TI-ABS-KW], "circular economy") 
+OR CONTAINS([TI-ABS-KW], "air quality") 
+OR CONTAINS([TI-ABS-KW], "green space") 
+OR CONTAINS([TI-ABS-KW], "green spaces") 
+OR CONTAINS([TI-ABS-KW], "nature inclusive") 
+OR CONTAINS([TI-ABS-KW], "nature inclusive building") 
+OR CONTAINS([TI-ABS-KW], "nature inclusive buildings" ) 
+)
+)
+)
+THEN "SDG11" ELSE "0" END)
+END
