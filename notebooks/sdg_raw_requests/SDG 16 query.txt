@@ -1,0 +1,142 @@
+Case [Code ASJC]
+ WHEN "3306" then "SDG16"
+ WHEN "3308" then "SDG16"
+ WHEN "3311" then "SDG16"
+ WHEN "3312" then "SDG16"
+ WHEN "3320" then "SDG16"
+ WHEN "3321" then "SDG16"
+
+ELSE
+(
+
+IF 
+(
+ (
+STARTSWITH([Code ASJC],"15") OR STARTSWITH([Code ASJC],"16") OR STARTSWITH([Code ASJC],"17") OR STARTSWITH([Code ASJC],"19") OR STARTSWITH([Code ASJC],"21") OR STARTSWITH([Code ASJC],"22") OR STARTSWITH([Code ASJC],"23") OR STARTSWITH([Code ASJC],"25") OR STARTSWITH([Code ASJC],"26") OR STARTSWITH([Code ASJC],"31") OR STARTSWITH([Code ASJC],"12") OR STARTSWITH([Code ASJC],"14") OR STARTSWITH([Code ASJC],"18") OR STARTSWITH([Code ASJC],"20") OR STARTSWITH([Code ASJC],"32") OR STARTSWITH([Code ASJC],"33") OR STARTSWITH([Code ASJC],"10") OR STARTSWITH([Code ASJC],"11") OR [Code ASJC]="unknown" 
+)
+ 
+ AND
+
+
+
+
+(
+CONTAINS([TI-ABS-KW], "peace justice and strong institutions")
+ OR CONTAINS([TI-ABS-KW], "actual innocence")
+ OR CONTAINS([TI-ABS-KW], "false confession")
+ OR CONTAINS([TI-ABS-KW], "armed conflict")
+ OR CONTAINS([TI-ABS-KW], "armed conflicts")
+ OR CONTAINS([TI-ABS-KW], "civil conflict")
+ OR CONTAINS([TI-ABS-KW], "civil conflicts")
+ OR CONTAINS([TI-ABS-KW], "civil war")
+ OR CONTAINS([TI-ABS-KW], "illicit financial")
+ OR (CONTAINS([TI-ABS-KW], "war") AND (CONTAINS([TI-ABS-KW], "conflict")
+ OR CONTAINS([TI-ABS-KW], "warfare")
+ OR CONTAINS([TI-ABS-KW], "democracy")
+ OR CONTAINS([TI-ABS-KW], "Geneva Convention")
+ OR CONTAINS([TI-ABS-KW], "treaty")
+ OR CONTAINS([TI-ABS-KW], "peace")))
+ 
+ OR CONTAINS([TI-ABS-KW], "peacekeeping")
+ OR (CONTAINS([TI-ABS-KW], "corruption")  AND (CONTAINS([TI-ABS-KW], "institution")
+ OR CONTAINS([TI-ABS-KW], "public official")
+ OR CONTAINS([TI-ABS-KW], "government")
+ OR CONTAINS([TI-ABS-KW], "bribery")
+ OR CONTAINS([TI-ABS-KW], "conflict")))
+ OR CONTAINS([TI-ABS-KW], "crime")
+ OR CONTAINS([TI-ABS-KW], "crimes")
+ OR CONTAINS([TI-ABS-KW], "criminal")
+ OR CONTAINS([TI-ABS-KW], "democratic deficit")
+ OR ((CONTAINS([TI-ABS-KW], "democratisation") OR CONTAINS([TI-ABS-KW], "democratization"))
+ AND (CONTAINS([TI-ABS-KW], "institutional")
+ OR CONTAINS([TI-ABS-KW], "conflict")
+ OR CONTAINS([TI-ABS-KW], "decision-making")
+ OR CONTAINS([TI-ABS-KW], "society")
+ OR CONTAINS([TI-ABS-KW], "politics")
+ OR CONTAINS([TI-ABS-KW], "financial aid")))
+ OR CONTAINS([TI-ABS-KW], "ethnic conflict")
+ OR CONTAINS([TI-ABS-KW], "ethnic conflicts")
+ OR CONTAINS([TI-ABS-KW], "exoneration")
+ OR CONTAINS([TI-ABS-KW], "genocid")
+ OR CONTAINS([TI-ABS-KW], "homicide")
+ OR CONTAINS([TI-ABS-KW], "murder")
+ OR CONTAINS([TI-ABS-KW], "human trafficking")
+ OR CONTAINS([TI-ABS-KW], "justice system")
+ OR CONTAINS([TI-ABS-KW], "system of justice")
+ OR CONTAINS([TI-ABS-KW], "equal access to justice")
+ OR CONTAINS([TI-ABS-KW], "arbitrary justice")
+ OR CONTAINS([TI-ABS-KW], "refugee")
+ OR CONTAINS([TI-ABS-KW], "terroris")
+ OR CONTAINS([TI-ABS-KW], "violence")
+ OR CONTAINS([TI-ABS-KW], "torture")
+ OR CONTAINS([TI-ABS-KW], "effective rule of law")
+ OR CONTAINS([TI-ABS-KW], "arms flow")
+ OR CONTAINS([TI-ABS-KW], "transparent institution")
+ OR CONTAINS([TI-ABS-KW], "transparent institutions")
+ OR CONTAINS([TI-ABS-KW], "good governance")
+ OR CONTAINS([TI-ABS-KW], "legal identity for all")
+ OR CONTAINS([TI-ABS-KW], "provide legal identity")
+ OR CONTAINS([TI-ABS-KW], "freedom of information")
+ OR CONTAINS([TI-ABS-KW], "human rights institution")
+ OR CONTAINS([TI-ABS-KW], "human rights activists")
+ OR CONTAINS([TI-ABS-KW], "fundamental freedom")
+ OR CONTAINS([TI-ABS-KW], "fundamental freedoms")
+ OR CONTAINS([TI-ABS-KW], "violent conflict")
+ OR CONTAINS([TI-ABS-KW], "violent conflicts")
+ OR CONTAINS([TI-ABS-KW], "peaceful society")
+ OR CONTAINS([TI-ABS-KW], "effective institution")
+ OR CONTAINS([TI-ABS-KW], "effective institutions")
+ OR CONTAINS([TI-ABS-KW], "accountable institution")
+ OR CONTAINS([TI-ABS-KW], "accountable institutions")
+ OR CONTAINS([TI-ABS-KW], "inclusive institution")
+ OR CONTAINS([TI-ABS-KW], "inclusive institutions")
+ OR CONTAINS([TI-ABS-KW], "child abuse")
+ OR CONTAINS([TI-ABS-KW], "child exploitation")
+ OR CONTAINS([TI-ABS-KW], "child trafficking")
+ OR CONTAINS([TI-ABS-KW], "child torture")
+ OR CONTAINS([TI-ABS-KW], "torture of children")
+ OR CONTAINS([TI-ABS-KW], "children abuse")
+ OR CONTAINS([TI-ABS-KW], "children exploitation")
+ OR CONTAINS([TI-ABS-KW], "children trafficking")
+ OR CONTAINS([TI-ABS-KW], "children torture")
+ OR CONTAINS([TI-ABS-KW], "arbitrary detention")
+ OR CONTAINS([TI-ABS-KW], "unsentenced detention")
+ OR CONTAINS([TI-ABS-KW], "judicial system")
+ OR CONTAINS([TI-ABS-KW], "criminal tribunal")
+ OR CONTAINS([TI-ABS-KW], "inclusive society")
+ OR CONTAINS([TI-ABS-KW], "inclusive societies")
+ OR CONTAINS([TI-ABS-KW], "responsive institution")
+ OR CONTAINS([TI-ABS-KW], "responsive institutions")
+ OR CONTAINS([TI-ABS-KW], "fair society")
+ OR CONTAINS([TI-ABS-KW], "fair societies")
+ OR CONTAINS([TI-ABS-KW], "legal remedy")
+ OR CONTAINS([TI-ABS-KW], "legal remedies")
+ OR CONTAINS([TI-ABS-KW], "independence of judiciary")
+ OR CONTAINS([TI-ABS-KW], "independent judiciary")
+ OR CONTAINS([TI-ABS-KW], "separation of powers")
+ OR CONTAINS([TI-ABS-KW], "extremism")
+ OR CONTAINS([TI-ABS-KW], "war crime")
+ OR CONTAINS([TI-ABS-KW], "peaceful society")
+ OR CONTAINS([TI-ABS-KW], "organized crime")
+ OR CONTAINS([TI-ABS-KW], "illicit transfer")
+ OR CONTAINS([TI-ABS-KW], "illicit money")
+ OR CONTAINS([TI-ABS-KW], "arms trafficking")
+ OR CONTAINS([TI-ABS-KW], "cybercrime") OR CONTAINS([TI-ABS-KW], "cybercriminality")
+ OR CONTAINS([TI-ABS-KW], "insurgence")
+ OR CONTAINS([TI-ABS-KW], "local participation")
+  OR CONTAINS([TI-ABS-KW], "sustainability initiative")
+ OR CONTAINS([TI-ABS-KW], "democratic institution")
+ OR CONTAINS([TI-ABS-KW], "political instability")
+ OR (CONTAINS([TI-ABS-KW], "decision-making") AND 
+ (CONTAINS([TI-ABS-KW], "responsive")
+ OR CONTAINS([TI-ABS-KW], "inclusive")
+ OR CONTAINS([TI-ABS-KW], "participatory")
+ OR CONTAINS([TI-ABS-KW], "representative")))
+ OR CONTAINS([TI-ABS-KW], "Aarhus Convention")
+ OR CONTAINS([TI-ABS-KW], "press freedom")
+ OR CONTAINS([TI-ABS-KW], "freedom of speech") 
+
+))
+THEN "SDG16" ELSE "0" END)
+
+END

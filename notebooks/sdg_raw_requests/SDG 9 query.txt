@@ -1,0 +1,107 @@
+IF (
+
+
+([Code ASJC]="3303" AND ( CONTAINS([TI-ABS-KW], "innovation") OR CONTAINS([TI-ABS-KW], "industrial") OR CONTAINS([TI-ABS-KW], "industrialization") OR CONTAINS([TI-ABS-KW], "industrialisation") OR CONTAINS([TI-ABS-KW], "industry") OR CONTAINS([TI-ABS-KW], "industries") OR CONTAINS([TI-ABS-KW], "manufacturing") OR CONTAINS([TI-ABS-KW], "infrastructure") OR CONTAINS([TI-ABS-KW], "enterprise") OR CONTAINS([TI-ABS-KW], "entrepreneur") OR [Infra]))
+
+OR
+([Code ASJC]="2209" OR [Code ASJC]="1705" OR [Code ASJC]="1405") 
+
+
+OR
+
+([Code ASJC]="2205" OR [Code ASJC]="1909" OR [Code ASJC]="2215" OR [Code ASJC]="2213" OR [Code ASJC]="2216" OR [Code ASJC]="3313")
+
+
+
+
+
+OR 
+(
+CONTAINS([TI-ABS-KW], "Industry, Innovation and Infrastructure")
+ OR CONTAINS([TI-ABS-KW], "industrial growth")
+ OR CONTAINS([TI-ABS-KW], "industrial diversification")
+ OR CONTAINS([TI-ABS-KW], "industrial innovation")
+ OR CONTAINS([TI-ABS-KW], "sustainable industrialization")
+ OR CONTAINS([TI-ABS-KW], "sustainable industrialisation")
+ OR CONTAINS([TI-ABS-KW], "inclusive industrialization")
+ OR CONTAINS([TI-ABS-KW], "inclusive industrialisation")
+ OR CONTAINS([TI-ABS-KW], "infrastructural development")
+ OR CONTAINS([TI-ABS-KW], "infrastructural investment")
+ OR CONTAINS([TI-ABS-KW], "infrastructure investment")
+ OR CONTAINS([TI-ABS-KW], "public infrastructure")
+ OR CONTAINS([TI-ABS-KW], "resilient infrastructure")
+ OR CONTAINS([TI-ABS-KW], "transborder infrastructure")
+ OR CONTAINS([TI-ABS-KW], "public infrastructures")
+ OR CONTAINS([TI-ABS-KW], "resilient infrastructures")
+ OR CONTAINS([TI-ABS-KW], "transborder infrastructures")
+ OR (CONTAINS([TI-ABS-KW], "industrial emissions") AND CONTAINS([TI-ABS-KW], "mitigation" ))
+ OR CONTAINS([TI-ABS-KW], "industrial waste management")
+ OR CONTAINS([TI-ABS-KW], "industrial waste treatment")
+ OR CONTAINS([TI-ABS-KW], "clean industrial processes") 
+
+ OR (
+ (CONTAINS([TI-ABS-KW], "Africa") OR CONTAINS([TI-ABS-KW], "least developed countries") OR CONTAINS([TI-ABS-KW], "landlocked country") OR CONTAINS([TI-ABS-KW], "developing country")
+ OR CONTAINS([TI-ABS-KW], "landlocked countries") OR CONTAINS([TI-ABS-KW], "developing countries") OR CONTAINS([TI-ABS-KW], "small island developing States")  OR [DevCountries])
+	AND (
+CONTAINS([TI-ABS-KW], "domestic technology development")
+ OR CONTAINS([TI-ABS-KW], "research and development")
+ OR CONTAINS([TI-ABS-KW], "access to the Internet" )
+ OR CONTAINS([TI-ABS-KW], "security in cloud") OR CONTAINS([TI-ABS-KW], "social network privacy") OR CONTAINS([TI-ABS-KW], "cryptography") OR CONTAINS([TI-ABS-KW], "network security") OR CONTAINS([TI-ABS-KW], "network privacy") 
+ OR CONTAINS([TI-ABS-KW], "information and communications technology" )
+ OR CONTAINS([TI-ABS-KW], "transportation services")
+ OR CONTAINS([TI-ABS-KW], "mobile connectivity")
+ OR CONTAINS([TI-ABS-KW], "broadband access")
+ OR CONTAINS([TI-ABS-KW], "mobile cellular signal")
+ OR CONTAINS([TI-ABS-KW], "online access")
+ OR CONTAINS([TI-ABS-KW], "3G")
+ OR CONTAINS([TI-ABS-KW], "Internet through a third generation") 
+ OR ( (CONTAINS([TI-ABS-KW], "enterprise") OR CONTAINS([TI-ABS-KW], "entrepreneur")
+ OR CONTAINS([TI-ABS-KW], "small-scale industrial")) AND (CONTAINS([TI-ABS-KW], "financial support")
+ OR CONTAINS([TI-ABS-KW], "technological support")
+ OR CONTAINS([TI-ABS-KW], "technical support")
+ OR CONTAINS([TI-ABS-KW], "financial services")
+ OR CONTAINS([TI-ABS-KW], "affordable credit"))
+	)
+	)
+)
+
+OR CONTAINS([TI-ABS-KW], "infrastructural Development")
+ OR CONTAINS([TI-ABS-KW], "microenterprise")
+ OR CONTAINS([TI-ABS-KW], "micro-enterprise")
+ OR CONTAINS([TI-ABS-KW], "small enterprise")
+ OR CONTAINS([TI-ABS-KW], "medium enterprise")
+ OR CONTAINS([TI-ABS-KW], "small enterprises")
+ OR CONTAINS([TI-ABS-KW], "medium enterprises")
+ OR CONTAINS([TI-ABS-KW], "small entrepreneur")
+ OR CONTAINS([TI-ABS-KW], "medium entrepreneur")
+ OR CONTAINS([TI-ABS-KW], "small entrepreneurs")
+ OR CONTAINS([TI-ABS-KW], "medium entrepreneurs")
+ OR CONTAINS([TI-ABS-KW], "value chain management")
+ OR CONTAINS([TI-ABS-KW], "manufacturing innovation")
+ OR CONTAINS([TI-ABS-KW], "sustainable production")
+ OR CONTAINS([TI-ABS-KW], "sustainable manufacturing")
+ OR CONTAINS([TI-ABS-KW], "manufacturing investment")
+ OR CONTAINS([TI-ABS-KW], "sustainable transportation")
+ OR CONTAINS([TI-ABS-KW], "accessible transportation")
+ OR CONTAINS([TI-ABS-KW], "hybrid and alternative drive vehicles") OR CONTAINS([TI-ABS-KW], "hybrid electric vehicle") OR CONTAINS([TI-ABS-KW], "hybrid vehicle") OR CONTAINS([TI-ABS-KW], "light rail transit") OR CONTAINS([TI-ABS-KW], "liquid nitrogen powered engine ") OR CONTAINS([TI-ABS-KW], "sustainable mobility") OR CONTAINS([TI-ABS-KW], "sustainable transport and mobility") OR CONTAINS([TI-ABS-KW], "sustainable urban mobility") OR CONTAINS([TI-ABS-KW], "transport emission reduction") OR CONTAINS([TI-ABS-KW], "transport planning") OR CONTAINS([TI-ABS-KW], "transport sustainability") OR CONTAINS([TI-ABS-KW], "vehicle safety") OR CONTAINS([TI-ABS-KW], "wheel-rail system") 
+ 
+ 
+ 
+ OR CONTAINS([TI-ABS-KW], "inclusive transportation")
+ OR CONTAINS([TI-ABS-KW], "R&D investment")
+ OR CONTAINS([TI-ABS-KW], "green product")
+ OR CONTAINS([TI-ABS-KW], "green products")
+ OR CONTAINS([TI-ABS-KW], "sustainable manufacturing")
+ OR (CONTAINS([TI-ABS-KW], "cradle to cradle") AND (CONTAINS([TI-ABS-KW],"industry") OR CONTAINS([TI-ABS-KW],"industries") ))
+ OR CONTAINS([TI-ABS-KW], "closed loop supply chain")
+ OR CONTAINS([TI-ABS-KW], "process innovation")
+ OR CONTAINS([TI-ABS-KW], "product innovation")
+  OR CONTAINS([TI-ABS-KW], "innovation policies")
+   OR CONTAINS([TI-ABS-KW], "innovation policy")
+ OR CONTAINS([TI-ABS-KW], "inclusive innovation") 
+ 
+ ) 
+
+)
+
+THEN "SDG9" ELSE "0" END

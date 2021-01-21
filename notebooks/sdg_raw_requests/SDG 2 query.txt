@@ -1,0 +1,114 @@
+Case [Code ASJC]
+WHEN "1102" then "SDG2"
+WHEN "1106" then "SDG2"
+
+
+ELSE
+(
+
+IF 
+(
+ (
+ (
+ STARTSWITH([Code ASJC],"15") OR STARTSWITH([Code ASJC],"16") OR STARTSWITH([Code ASJC],"17") OR STARTSWITH([Code ASJC],"19") OR STARTSWITH([Code ASJC],"21") OR STARTSWITH([Code ASJC],"22") OR STARTSWITH([Code ASJC],"23") OR STARTSWITH([Code ASJC],"25") OR STARTSWITH([Code ASJC],"26") OR STARTSWITH([Code ASJC],"31") OR STARTSWITH([Code ASJC],"12") OR STARTSWITH([Code ASJC],"14") OR STARTSWITH([Code ASJC],"18") OR STARTSWITH([Code ASJC],"20") OR STARTSWITH([Code ASJC],"32") OR STARTSWITH([Code ASJC],"33") OR STARTSWITH([Code ASJC],"10") OR STARTSWITH([Code ASJC],"11") OR [Code ASJC]="unknown" 
+)
+ 
+ AND
+
+
+(
+
+CONTAINS([TI-ABS-KW],"land tenure rights" )
+OR (CONTAINS([TI-ABS-KW],"smallholder") AND 
+CONTAINS([TI-ABS-KW],"farm"))
+OR CONTAINS([TI-ABS-KW],"forestry" )
+OR CONTAINS([TI-ABS-KW],"pastoral" )
+OR CONTAINS([TI-ABS-KW],"agriculture" )
+OR CONTAINS([TI-ABS-KW],"fishery")
+OR CONTAINS([TI-ABS-KW],"fisheries")
+OR CONTAINS([TI-ABS-KW],"food producer" )
+OR CONTAINS([TI-ABS-KW],"food producers") 
+OR CONTAINS([TI-ABS-KW],"malnourish" )
+OR CONTAINS([TI-ABS-KW],"malnutrition" )
+OR CONTAINS([TI-ABS-KW],"undernourish" )
+OR CONTAINS([TI-ABS-KW],"undernutrition" )
+OR CONTAINS([TI-ABS-KW],"agricultural production" )
+OR CONTAINS([TI-ABS-KW],"agriculture as a production")
+OR CONTAINS([TI-ABS-KW],"agricultural productivity" )
+OR CONTAINS([TI-ABS-KW],"agricultural productivity")
+OR CONTAINS([TI-ABS-KW],"agricultural practices" )
+OR CONTAINS([TI-ABS-KW],"agricultural management" )
+OR CONTAINS([TI-ABS-KW],"food production" )
+OR CONTAINS([TI-ABS-KW],"production of food")
+OR CONTAINS([TI-ABS-KW],"food productivity" )
+OR CONTAINS([TI-ABS-KW],"food security" )
+OR CONTAINS([TI-ABS-KW],"security and food")
+OR CONTAINS([TI-ABS-KW],"security of food")
+OR CONTAINS([TI-ABS-KW],"food safety")
+OR CONTAINS([TI-ABS-KW],"food insecurity" )
+OR CONTAINS([TI-ABS-KW],"land right" )
+OR CONTAINS([TI-ABS-KW],"access to land")
+OR CONTAINS([TI-ABS-KW],"land rights" )
+OR CONTAINS([TI-ABS-KW],"land reform" )
+OR CONTAINS([TI-ABS-KW],"land reforms" )
+OR CONTAINS([TI-ABS-KW],"resilient agricultural practices" )
+OR (CONTAINS([TI-ABS-KW],"agriculture") AND CONTAINS([TI-ABS-KW],"potassium"))
+OR CONTAINS([TI-ABS-KW],"fertiliser" )
+OR CONTAINS([TI-ABS-KW],"soil fertility")
+OR CONTAINS([TI-ABS-KW],"soil amendment")
+OR CONTAINS([TI-ABS-KW],"crop rotation")
+OR CONTAINS([TI-ABS-KW],"crop production")
+OR CONTAINS([TI-ABS-KW], " crops ")  OR CONTAINS([TI-ABS-KW], " crops.")  OR CONTAINS([TI-ABS-KW], " crops,") OR CONTAINS([TI-ABS-KW], " crops;")  OR CONTAINS([TI-ABS-KW], " crops:")
+OR CONTAINS([TI-ABS-KW],"agricultural management")
+OR CONTAINS([TI-ABS-KW],"fertilizer" )
+OR CONTAINS([TI-ABS-KW],"improve land and soil quality")
+OR CONTAINS([TI-ABS-KW],"improve land quality")
+OR CONTAINS([TI-ABS-KW],"improve soil quality")
+OR CONTAINS([TI-ABS-KW],"food nutrition improvement" )
+OR CONTAINS([TI-ABS-KW],"hidden hunger" )
+OR CONTAINS([TI-ABS-KW],"end hunger")
+OR CONTAINS([TI-ABS-KW],"genetically modified food" )
+OR ((CONTAINS([TI-ABS-KW],"gmo" ) OR CONTAINS([TI-ABS-KW],"genetically modified ")) AND CONTAINS([TI-ABS-KW],"food") )
+OR CONTAINS([TI-ABS-KW],"agroforestry practices" )
+OR CONTAINS([TI-ABS-KW],"agroforestry management" )
+OR CONTAINS([TI-ABS-KW],"agricultural innovation" )
+OR (CONTAINS([TI-ABS-KW],"food security") AND (CONTAINS([TI-ABS-KW],"genetic diversity") OR CONTAINS([TI-ABS-KW],"seed and plant banks") OR CONTAINS([TI-ABS-KW],"seed banks")
+OR CONTAINS([TI-ABS-KW],"plant blanks") ) )
+OR (CONTAINS([TI-ABS-KW],"food market") AND (CONTAINS([TI-ABS-KW],"restriction" ) OR CONTAINS([TI-ABS-KW],"tariff" ) OR CONTAINS([TI-ABS-KW],"access" ) OR CONTAINS([TI-ABS-KW],"north south divide" ) OR CONTAINS([TI-ABS-KW],"development governance") ) )
+OR CONTAINS([TI-ABS-KW],"food governance" )
+OR CONTAINS([TI-ABS-KW],"food price volatility")
+OR CONTAINS([TI-ABS-KW],"food supply chain" )
+OR CONTAINS([TI-ABS-KW],"food value chain" )
+OR CONTAINS([TI-ABS-KW],"food commodity market") 
+OR CONTAINS([TI-ABS-KW], "agricultural sustainability") OR CONTAINS([TI-ABS-KW], "agrobiodiversity") OR CONTAINS([TI-ABS-KW], "agroecology") OR CONTAINS([TI-ABS-KW], "conventional farming system") OR CONTAINS([TI-ABS-KW], "cover crops") OR CONTAINS([TI-ABS-KW], "farming systems") OR CONTAINS([TI-ABS-KW], "grain for green") OR CONTAINS([TI-ABS-KW], "integrated management practices") OR CONTAINS([TI-ABS-KW], "organic farming") OR CONTAINS([TI-ABS-KW], "pastoralism") OR CONTAINS([TI-ABS-KW], "pastoralists") OR CONTAINS([TI-ABS-KW], "precision farming") OR CONTAINS([TI-ABS-KW], "rainfed cultivation") OR CONTAINS([TI-ABS-KW], "rainwater harvesting") OR CONTAINS([TI-ABS-KW], "shifting cultivation")
+)
+)
+
+OR
+
+ (CONTAINS([TI-ABS-KW],"poverty and hunger")
+OR CONTAINS([TI-ABS-KW],"poverty and hunger")
+OR CONTAINS([TI-ABS-KW],"hunger and poverty")
+OR CONTAINS([TI-ABS-KW],"extreme hunger")
+OR CONTAINS([TI-ABS-KW],"world hunger")
+OR CONTAINS([TI-ABS-KW],"hunger in the world")
+OR CONTAINS([TI-ABS-KW],"world without hunger")
+OR CONTAINS([TI-ABS-KW],"tackling poverty and hunger")
+OR CONTAINS([TI-ABS-KW],"combat hunger")
+OR CONTAINS([TI-ABS-KW],"combating hunger")
+OR CONTAINS([TI-ABS-KW],"ending hunger")
+OR CONTAINS([TI-ABS-KW],"end hunger")
+OR CONTAINS([TI-ABS-KW],"eradicate hunger")
+OR CONTAINS([TI-ABS-KW],"hunger alleviation")
+OR CONTAINS([TI-ABS-KW],"alleviate hunger")
+OR CONTAINS([TI-ABS-KW],"reduce hunger")
+OR CONTAINS([TI-ABS-KW],"hunger reduction")
+OR CONTAINS([TI-ABS-KW],"protection against hunger")
+OR CONTAINS([TI-ABS-KW],"protect against hunger")
+OR CONTAINS([TI-ABS-KW],"people affected by hunger")
+)
+
+)
+THEN "SDG2" ELSE "0" END)
+
+END

@@ -1,0 +1,25 @@
+Case [Code ASJC]
+WHEN "2100" then "SDG7"
+WHEN "2101" then "SDG7"
+WHEN "2102" then "SDG7"
+WHEN "2103" then "SDG7"
+WHEN "2104" then "SDG7"
+WHEN "2105" then "SDG7"
+
+ELSE
+(
+
+IF 
+(
+ (
+ 
+STARTSWITH([Code ASJC],"15") OR STARTSWITH([Code ASJC],"16") OR STARTSWITH([Code ASJC],"17") OR STARTSWITH([Code ASJC],"19") OR STARTSWITH([Code ASJC],"21") OR STARTSWITH([Code ASJC],"22") OR STARTSWITH([Code ASJC],"23") OR STARTSWITH([Code ASJC],"25") OR STARTSWITH([Code ASJC],"26") OR STARTSWITH([Code ASJC],"31") OR STARTSWITH([Code ASJC],"12") OR STARTSWITH([Code ASJC],"14") OR STARTSWITH([Code ASJC],"18") OR STARTSWITH([Code ASJC],"20") OR STARTSWITH([Code ASJC],"32") OR STARTSWITH([Code ASJC],"33") OR STARTSWITH([Code ASJC],"10") OR STARTSWITH([Code ASJC],"11") OR [Code ASJC]="unknown"
+)
+ 
+ AND
+ 
+ ( [SDG7_PART1] OR   [SDG7_PART2] )
+ )
+  AND NOT [Astronomy]
+  AND NOT (CONTAINS([TI-ABS-KW],"energy conservation") AND (CONTAINS([TI-ABS-KW],"dissipative") OR CONTAINS([TI-ABS-KW],"dissipation") OR CONTAINS([TI-ABS-KW],"energy variable") OR CONTAINS([TI-ABS-KW],"energy–momentum conservation") OR CONTAINS([TI-ABS-KW],"pseudo-energy")))
+ THEN "SDG7" ELSE "0" END) end
