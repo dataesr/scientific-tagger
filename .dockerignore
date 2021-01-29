@@ -1,0 +1,8 @@
+__pycache__
+.git/
+*.pyc
+*.pyi
+.cache
+k8s/
+models/
+notebooks/
