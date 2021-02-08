@@ -11,39 +11,57 @@ if path.exists("/models/all_categ_revue.pkl") is False:
     download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/all_categ_revue.pkl", "/models/")
 all_categ_revue = pickle.load(open('/models/all_categ_revue.pkl', 'rb'))
 
-def get_categ_from_source(source):
+def get_categ_from_source(source, top=1):
     try:
         mst_common = Counter(all_categ_revue[source]).most_common()
-        if mst_common[0][0] == 'unknown':
-            ans = mst_common[1][0] # the 2nd most common
-        else:
-            ans = mst_common[0][0] # the most common
-
+        mst_common_list = [e[0] for e in mst_common if (e[0] and (e[0] not in ['unknown', '']))]
+        ans = ";".join([e for e in mst_common_list[0:top]]) # the most common
+        if ans == "":
+            ans = 'unknown'
     except:
         ans = 'unknown'
     return ans
 
-def get_discipline_calc(title, journal_name):
+def get_discipline_calc(title, journal_name, details = False):
     current_field = "unknown"
+    method = ""
+    pf_tags = []
+
+    top_categ = get_categ_from_source(journal_name, 3)
+
     if isinstance(title, str) and len(title)>0:
         prediction_pf = get_pf_label(title)
         current_field = get_bso_category(prediction_pf)
+        method = "pf_classifier_confident"
+        pf_tags = prediction_pf
 
     if current_field == "unknown":
         current_field = get_categ_from_source(journal_name)
+        method = "category_from_journal"
+
     if current_field == 'unknown' and isinstance(title, str) and len(title)>0:
         prediction_pf_2 = get_pf_label(title, nb_top = 10)
         current_field = get_bso_category(prediction_pf_2, is_strict=False)
-    return current_field
+        method = "pf_classifier_lenient"
+        pf_tags = prediction_pf_2
+
+    ans = { "bso_classification": current_field }
+    if details:
+        ans.update( {
+            "bso_classification_method": method,
+            "bso_classification_pf_tags": pf_tags,
+            "bso_classification_journal_top_categ": top_categ
+        } )
+    return ans
 
 
-def bso_classify(elems):
+def bso_classify(elems, details = False):
     for e in elems:
         if 'doi' in e and 'title' not in e or 'journal_name' not in e:
             #e = enrich_metadata(e)
             continue
 
         if 'title' in e and 'journal_name' in e:
-            bso_field = get_discipline_calc(e['title'], e['journal_name'])
-            e['bso_classification'] = bso_field
+            calc = get_discipline_calc(e['title'], e['journal_name'], details)
+            e.update(calc)
     return elems
