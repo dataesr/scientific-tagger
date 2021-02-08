@@ -12,12 +12,11 @@ if path.exists("/models/model_pf.vec") is False:
 model_pf = fasttext.load_model('/models/model_pf.bin')
 
 def get_pf_label(title, nb_top = 10):
-    if title is None or len(title) == 0:
+    if not isinstance(title, str) or title is None or len(title) == 0:
         return "unknown"
     title_norm = normalize_text(title).lower()
     print(f"get_pf_label {title} ==> {title_norm}", flush=True)
     prediction = model_pf.predict(title_norm,nb_top)
-    print(f"prediction {prediction}", flush=True)
     return prediction
 
 

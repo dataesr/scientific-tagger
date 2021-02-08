@@ -1,3 +1,5 @@
+CONFIDENCE_THRESHOLD = 0.15
+
 def get_bso_category(prediction, is_strict = True, verbose=False):
     
     if(verbose):
@@ -6,7 +8,7 @@ def get_bso_category(prediction, is_strict = True, verbose=False):
     for i, k in enumerate(prediction[0]):
         
 
-        if is_strict and prediction[1][i] < 0.2:
+        if is_strict and prediction[1][i] < CONFIDENCE_THRESHOLD:
             break
             
         #Medical
