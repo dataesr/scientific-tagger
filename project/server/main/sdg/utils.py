@@ -10,3 +10,9 @@ def does_contain(input_str, list_of_kw):
                 return (True, f)
     return (False, None)
     
+def does_contain_list(input_list, list_of_kw):
+    for input_str in input_list:
+        contain_bool, evidence = does_contain(input_str, list_of_kw)
+        if contain_bool:
+            return (contain_bool, evidence)
+    return (False, None)
