@@ -1,12 +1,12 @@
-from project.server.main.sdg.utils import does_contain
+from project.server.main.sdg.utils import does_contain, does_contain_list
 
-def test_sdg2(asjc, ti_abs_kw):
-    cond1, evidence1 = does_contain(asjc, ["1102", "1106"])
+def test_sdg2(asjc_list, ti_abs_kw):
+    cond1, evidence1 = does_contain_list(asjc_list, ["1102", "1106"])
 
-    if asjc is None:
+    if None in asjc_list:
         cond2_0, evidence2_0 = True, 'none'
     else:
-        cond2_0, evidence2_0 = does_contain(asjc[0:2], ["15","16","17","19","21","22","23","25","26","31","12","14","18","20","32","33","10","11"])
+        cond2_0, evidence2_0 = does_contain_list([asjc[0:2] for asjc in asjc_list], ["15","16","17","19","21","22","23","25","26","31","12","14","18","20","32","33","10","11"])
 
     cond2_1, evidence2_1 = does_contain(ti_abs_kw, 
             ["land tenure rights"

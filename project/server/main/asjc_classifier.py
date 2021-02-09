@@ -15,8 +15,8 @@ for e in asjc_data:
 def asjc_classify(elems, details = False):
     for e in elems:
         if 'issn_list' not in e:
-            if 'issns' in e:
-                issns = e['issns']
+            if 'journal_issns' in e:
+                issns = e['journal_issns']
                 issn_list = [k.strip() for k in re.split(",|;", issns)]
                 e['issn_list'] = [k for k in issn_list if len(k)>0]
             else:
@@ -24,7 +24,8 @@ def asjc_classify(elems, details = False):
         res = []
         for issn in e['issn_list']:
             if issn in asjc_dict:
-                res.append(asjc_dict['issn'])
+                if asjc_dict[issn]['asjc'] not in res:
+                    res += asjc_dict[issn]['asjc']
         calc = {'asjc_classification': res}
         e.update(calc)
     return elems
