@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: scientific-tagger-worker
+  name: scientific-tagger-worker
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: scientific-tagger-worker
+  template:
+    metadata:
+      labels:
+        io.kompose.service: scientific-tagger-worker
+    spec:
+      containers:
+      - args:
+        - /bin/sh
+        - start.sh
+        env:
+        - name: APP_SETTINGS
+          value: project.server.config.DevelopmentConfig
+        - name: OS_USERNAME
+          valueFrom:
+           secretKeyRef:
+             name: envsecret
+             key: os-username
+        - name: OS_TENANT_ID
+          valueFrom:
+            secretKeyRef:
+              name: envsecret
+              key: os-tenant-id
+        - name: OS_TENANT_NAME
+          valueFrom:
+            secretKeyRef:
+              name: envsecret
+              key: os-tenant-name
+        - name: OS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: envsecret
+              key: os-password
+        - name: OS_PROJECT_NAME
+          valueFrom:
+            secretKeyRef:
+              name: envsecret
+              key: os-project-name
+        - name: UPW_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: envsecret
+              key: upw-api-key
+        image: dataesr/scientific-tagger:1.0
+        name: scientific-tagger-worker
+        resources: {}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: "/models"
+          name: task-pv-storage
+      restartPolicy: Always
+      volumes:
+      - name: task-pv-storage
+        persistentVolumeClaim:
+          claimName: task-pv-claim
+status: {}

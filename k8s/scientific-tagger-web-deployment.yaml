@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: scientific-tagger-web
+  name: scientific-tagger-web
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: scientific-tagger-web
+  template:
+    metadata:
+      labels:
+        io.kompose.service: scientific-tagger-web
+    spec:
+      containers:
+      - args:
+        - python3
+        - manage.py
+        - run
+        - -h
+        - 0.0.0.0
+        env:
+        - name: APP_SETTINGS
+          value: project.server.config.DevelopmentConfig
+        - name: FLASK_DEBUG
+          value: "1"
+        image: dataesr/scientific-tagger:1.0
+        name: scientific-tagger-web
+        ports:
+        - containerPort: 5000
+        resources: {}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: "/models"
+          name: task-pv-storage
+      restartPolicy: Always
+      volumes:
+      - name: task-pv-storage
+        persistentVolumeClaim:
+          claimName: task-pv-claim
+status: {}

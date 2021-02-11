@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+secretGenerator:
+- name: envsecret
+  # env is a path to a file to read lines of key=val
+  # you can only specify one env file per secret.
+  env: env.txt
+  type: Opaque 
+
+resources:
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - dashboard-deployment.yaml
+  - dashboard-service.yaml
+  - scientific-tagger-worker-deployment.yaml
+  - scientific-tagger-web-deployment.yaml
+  - scientific-tagger-web-service.yaml
+  - persistent-volume.yaml
