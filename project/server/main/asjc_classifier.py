@@ -17,6 +17,8 @@ def asjc_classify(elems, details = False):
         if 'issn_list' not in e:
             if 'journal_issns' in e:
                 issns = e['journal_issns']
+                if not isinstance(issns, str):
+                    continue
                 issn_list = [k.strip() for k in re.split(",|;", issns)]
                 e['issn_list'] = [k for k in issn_list if len(k)>0]
             else:

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: dashboard
+  name: dashboard
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 9181
+    protocol: TCP
+    name: http
+  selector:
+    io.kompose.service: dashboard

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: dashboard
+  name: dashboard
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      io.kompose.service: dashboard
+  template:
+    metadata:
+      labels:
+        io.kompose.service: dashboard
+    spec:
+      containers:
+      - args:
+        - rq-dashboard
+        - -H
+        - redis
+        image: dataesr/dashboard-crawler:1.0
+        name: dashboard
+        ports:
+        - containerPort: 9181
+        resources: {}
+      restartPolicy: Always
+status: {}
