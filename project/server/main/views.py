@@ -14,7 +14,6 @@ def home():
 @main_blueprint.route("/classify", methods=["POST"])
 def run_task_classify():
     args = request.get_json(force=True)
-    print(args, flush=True)
     with Connection(redis.from_url(current_app.config["REDIS_URL"])):
         q = Queue(default_timeout=21600)
         task = q.enqueue(create_task_classify, args)
