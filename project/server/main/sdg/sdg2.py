@@ -25,7 +25,6 @@ def test_sdg2(asjc_list, ti_abs_kw):
 ,"agricultural production"
 ,"agriculture as a production"
 ,"agricultural productivity"
-,"agricultural productivity"
 ,"agricultural practices"
 ,"agricultural management"
 ,"food production"

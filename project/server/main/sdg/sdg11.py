@@ -17,10 +17,7 @@ def test_sdg11(asjc_list, ti_abs_kw):
     cond4_1, _ = does_contain_list(asjc_list, ["2311","3305","3313"])
     cond4 = cond4_0 and cond4_1
 
-    cond5_0, _ = does_contain(ti_abs_kw, [
-    " city " ," city." ," city," ," city;" ," city:"
-," cities " ," cities." ," cities," ," cities;" ," cities:"
-,"human settlement","human settlements","urban","metropolitan","metropole","town","municipal","municipality","municipalities"])
+    cond5_0 = cond4_0
     cond5_1, _ = does_contain(ti_abs_kw, [
     "gentrification" 
 ,"congestion" 
