@@ -30,7 +30,6 @@ def test_sdg14(asjc_list, ti_abs_kw):
 ,"marine policy"
 ,"marine resource"
 ,"marine debris"
-,"marine debris"
 ,"sea-level rise"
 ,"sea level rise"
 ,"marine reserves"

@@ -155,8 +155,8 @@ def test_sdg12(asjc_list, ti_abs_kw):
 ,"fossil fuel expenditure"
 ,"sustainability label"
 ,"sustainability labelling"
-,["consumption", "resource use",]
-,["consumption", "spill",]
+,["consumption", "resource use"]
+,["consumption", "spill"]
 ,["production", "resource use"]
 ,["production", "spill"]
 ,"eco-efficiency","ecoefficiency","ecological footprint" 
