@@ -8,7 +8,7 @@ class BaseConfig(object):
 
     WTF_CSRF_ENABLED = True
     REDIS_URL = "redis://redis:6379/0"
-    QUEUES = ["default"]
+    QUEUES = ["tagger"]
 
 
 class DevelopmentConfig(BaseConfig):

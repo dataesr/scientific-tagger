@@ -4,6 +4,7 @@ from project.server.main.pf_classifier import pf_classify
 from project.server.main.bso_classifier import bso_classify
 from project.server.main.asjc_classifier import asjc_classify
 from project.server.main.sdg_classifier import sdg_classify
+from project.server.main.bsso_classifier import bsso_classify
 
 def create_task_classify(arg):
     classification = {}
@@ -22,6 +23,9 @@ def create_task_classify(arg):
     
     if "asjc" in classification_type:
         publications = asjc_classify(publications)
+    
+    if "bsso" in classification_type:
+        publications = bsso_classify(publications)
     
     if "sdg" in classification_type:
         publications = sdg_classify(publications)

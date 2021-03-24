@@ -1,11 +1,12 @@
 from project.server.main.utils import download_file
 import json
-from os import path
+import os
 import re
 
-if path.exists("/models/asjc.json") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/asjc.json", "/models/")
-asjc_data = json.load(open('/models/asjc.json', 'r'))
+os.system("mkdir -p /src/models")
+if os.path.exists("/src/models/asjc.json") is False:
+    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/asjc.json", "/src/models/")
+asjc_data = json.load(open('/src/models/asjc.json', 'r'))
 
 asjc_dict = {}
 for e in asjc_data:

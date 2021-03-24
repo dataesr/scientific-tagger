@@ -14,3 +14,4 @@ python-keystoneclient==4.0.0
 python-swiftclient==3.9.0
 Unidecode==1.0.22
 fasttext==0.9.1
+tokenizers==0.10.1
