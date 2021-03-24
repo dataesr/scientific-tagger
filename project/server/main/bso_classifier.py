@@ -1,15 +1,15 @@
 import fasttext
 from collections import Counter
-from project.server.main.utils_str import normalize_text
 from project.server.main.bso_category import get_bso_category
 from project.server.main.pf_classifier import get_pf_label
 from project.server.main.utils import download_file
 import pickle
-from os import path
+import os
 
-if path.exists("/models/all_categ_revue.pkl") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/all_categ_revue.pkl", "/models/")
-all_categ_revue = pickle.load(open('/models/all_categ_revue.pkl', 'rb'))
+os.system("mkdir -p /src/models")
+if os.path.exists("/src/models/all_categ_revue.pkl") is False:
+    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/all_categ_revue.pkl", "/src/models/")
+all_categ_revue = pickle.load(open('/src/models/all_categ_revue.pkl', 'rb'))
 
 def get_categ_from_source(source, top=1):
     try:

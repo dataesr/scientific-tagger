@@ -1,22 +1,36 @@
 import fasttext
 from collections import Counter
-from project.server.main.utils_str import normalize_text
+from project.server.main.utils_str import normalize
 from project.server.main.utils import download_file
-from os import path
+import os
 
-if path.exists("/models/model_pf.bin") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/model_pf.bin", "/models/")
-if path.exists("/models/model_pf.vec") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/model_pf.vec", "/models/")
+os.system("mkdir -p /src/models")
 
-model_pf = fasttext.load_model('/models/model_pf.bin')
+project_id = os.getenv("OS_TENANT_ID")
+project_id = "32c5d10cb0fe4519b957064a111717e3"
+
+model={}
+
+def init():
+
+    if os.path.exists("/src/models/model_pf.bin") is False:
+        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.bin", "/src/models/")
+    if os.path.exists("/src/models/model_pf.vec") is False:
+        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.vec", "/src/models/")
+
+    model_pf = fasttext.load_model('/src/models/model_pf.bin')
+    model["pf"] = podel_pf
 
 def get_pf_label(title, nb_top = 10):
+
+    if len(model)<1:
+        init()
+
     if not isinstance(title, str) or title is None or len(title) == 0:
         return "unknown"
-    title_norm = normalize_text(title).lower()
+    title_norm = normalize(title) #lower
     print(f"get_pf_label {title} ==> {title_norm}", flush=True)
-    prediction = model_pf.predict(title_norm,nb_top)
+    prediction = model["pf"].predict(title_norm,nb_top)
     return prediction
 
 
