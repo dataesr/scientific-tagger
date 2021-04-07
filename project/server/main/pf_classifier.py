@@ -4,7 +4,7 @@ from project.server.main.utils_str import normalize
 from project.server.main.utils import download_file
 import os
 
-os.system("mkdir -p /src/models")
+os.system("mkdir -p /src/models/")
 
 project_id = os.getenv("OS_TENANT_ID")
 project_id = "32c5d10cb0fe4519b957064a111717e3"
@@ -14,12 +14,12 @@ model={}
 def init():
 
     if os.path.exists("/src/models/model_pf.bin") is False:
-        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.bin", "/src/models/")
+        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.bin", "/src/models/model_pf.bin")
     if os.path.exists("/src/models/model_pf.vec") is False:
-        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.vec", "/src/models/")
+        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.vec", "/src/models/model_pf.vec")
 
     model_pf = fasttext.load_model('/src/models/model_pf.bin')
-    model["pf"] = podel_pf
+    model["pf"] = model_pf
 
 def get_pf_label(title, nb_top = 10):
 

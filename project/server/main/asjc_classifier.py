@@ -3,9 +3,9 @@ import json
 import os
 import re
 
-os.system("mkdir -p /src/models")
+os.system("mkdir -p /src/models/")
 if os.path.exists("/src/models/asjc.json") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/asjc.json", "/src/models/")
+    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/asjc.json", "/src/models/asjc.json")
 asjc_data = json.load(open('/src/models/asjc.json', 'r'))
 
 asjc_dict = {}

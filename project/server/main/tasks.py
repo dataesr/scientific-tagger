@@ -5,6 +5,7 @@ from project.server.main.bso_classifier import bso_classify
 from project.server.main.asjc_classifier import asjc_classify
 from project.server.main.sdg_classifier import sdg_classify
 from project.server.main.bsso_classifier import bsso_classify
+from project.server.main.classification_train import calibrate_pubmed
 
 def create_task_classify(arg):
     classification = {}
@@ -33,3 +34,6 @@ def create_task_classify(arg):
     classification['publications'] = publications
     
     return classification
+
+def create_task_calibrate(arg):
+    calibrate_pubmed()
