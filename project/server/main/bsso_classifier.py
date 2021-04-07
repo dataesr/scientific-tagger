@@ -7,13 +7,13 @@ project_id = os.getenv("OS_TENANT_ID")
 project_id = "32c5d10cb0fe4519b957064a111717e3"
 models = {}
 
-os.system("mkdir -p /src/models")
+os.system("mkdir -p /src/models/")
 
 def init():
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
         model_name = f"/src/models/pubmed_model_{f}.model"
         if os.path.exists(model_name) is False:
-            download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}.model", "/src/models/")
+            download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}.model", model_name)
         print(f"loading model {model_name}", flush=True)
         models[f] = fasttext.load_model(model_name)
         print("nb labels : {}".format(models[f].get_labels()), flush=True)

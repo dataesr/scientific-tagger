@@ -28,6 +28,33 @@ conn = swiftclient.Connection(
     auth_version='3'
     )
 
+def upload_object(container, filename):
+    object_name = filename.split('/')[-1]
+    print(f"uploading {filename} in {container} as {object_name}", flush=True)
+    cmd = f"swift --os-auth-url https://auth.cloud.ovh.net/v3 --auth-version 3\
+      --key {key} --user {user} \
+      --os-user-domain-name Default \
+      --os-project-domain-name Default \
+      --os-project-id {project_id} \
+      --os-project-name {project_name} \
+      --os-region-name GRA"
+    cmd = cmd + f" upload {container} {filename} --object-name {object_name}"
+    cmd += " --segment-size 1048576000 --segment-threads 100"
+    os.system(cmd)
+    return f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/{container}/{object_name}"
+
+def download_object(container, filename, out):
+    print(f"downloading {filename} from {container} to {out}", flush=True)
+    cmd = f"swift --os-auth-url https://auth.cloud.ovh.net/v3 --auth-version 3\
+      --key {key} --user {user} \
+      --os-user-domain-name Default \
+      --os-project-domain-name Default \
+      --os-project-id {project_id} \
+      --os-project-name {project_name} \
+      --os-region-name GRA"
+    cmd = cmd + f" download {container} {filename} -o {out}"
+    os.system(cmd)
+
 def exists_in_storage(container, filename):
     try:
         conn.head_object(container, filename)
