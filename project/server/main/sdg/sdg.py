@@ -15,6 +15,10 @@ from project.server.main.sdg.sdg14 import test_sdg14
 from project.server.main.sdg.sdg15 import test_sdg15
 from project.server.main.sdg.sdg16 import test_sdg16
 
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
 def test_sdg(asjc, ti_abs_kw):
     res = []
     res.append(test_sdg1(asjc, ti_abs_kw))
@@ -36,7 +40,7 @@ def test_sdg(asjc, ti_abs_kw):
 
     sdg = []
     for ix, r in enumerate(res):
-        print(ix, flush=True)
+        logger.debug(ix, flush=True)
         if len(r)>0 and r not in sdg:
             sdg.append(r)
     return {"sdg_classification": sdg}

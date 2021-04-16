@@ -5,6 +5,10 @@ import gzip
 from io import BytesIO, TextIOWrapper
 import os
 
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
 user = "{}:{}".format(os.getenv("OS_TENANT_NAME"), os.getenv("OS_USERNAME"))
 key = os.getenv("OS_PASSWORD")
 project_id = os.getenv("OS_TENANT_ID")
@@ -43,7 +47,7 @@ def get_objects(container, path):
     return df.to_dict("records")
     
 def set_objects(all_objects, container, path):
-    print(f"setting object {container} {path}",end=':', flush=True) 
+    logger.debug(f"setting object {container} {path}",end=':', flush=True)
     if isinstance(all_objects, list):
         all_notices_content = pd.DataFrame(all_objects)
     else:
@@ -52,12 +56,12 @@ def set_objects(all_objects, container, path):
     with gzip.GzipFile(mode='w', fileobj=gz_buffer) as gz_file:
         all_notices_content.to_json(TextIOWrapper(gz_file, 'utf8'), orient='records')
     conn.put_object(container, path, contents=gz_buffer.getvalue())
-    print(f"done",end=':', flush=True) 
+    logger.debug(f"done",end=':', flush=True)
     return
 
 
 def delete_folder(cont_name, folder):
     cont = conn.get_container(cont_name)
     for n in [e['name'] for e in cont[1] if folder in e['name']]:
-        print(n)
+        logger.debug(n)
         conn.delete_object(cont_name, n)
