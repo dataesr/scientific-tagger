@@ -6,33 +6,22 @@ import os
 PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
 
-for_code_health = ['0304',
- '0601',
- '0604',
- '0605',
- '0606',
- '0903',
- '1003',
- '1004',
- '1101',
- '1102',
+for_code_health = [
  '1103',
- '1104',
- '1105',
- '1106',
- '1107',
- '1108',
- '1109',
- '1110',
- '1111',
- '1112',
- '1113',
- '1114',
- '1115',
- '1116',
  '1117',
- '1701',
- 'MD']
+ '0601',
+ '1109',
+ '1115',
+ '1112',
+ '1102',
+ '1114',
+ '0605',
+ 'MD',
+ '03',
+ '02',
+ '17',
+ '09',
+ '07']
 
 def set_FoR():
 
@@ -50,7 +39,7 @@ def set_FoR():
             for_code = "0"+for_code
         if len(for_code) == 3:
             for_code = "0"+for_code
-        if len(for_code) != 4:
+        if len(for_code) not in [2, 4]:
             continue
         for_dict[for_code] = row['FoR Description'].strip()
 
@@ -85,6 +74,10 @@ def set_FoR():
 
             if for_code in for_code_health:
                 fors_health.append(for_dict[for_code])
+            elif for_code[0:2] in for_code_health:
+                fors_health.append(for_dict[for_code[0:2]])
+            elif for_code[0:2] in ["06", "11"]:
+                fors_health.append("Other "+ for_dict[for_code[0:2]])
 
         for issn in issns:
             issn_dict[issn] = fors

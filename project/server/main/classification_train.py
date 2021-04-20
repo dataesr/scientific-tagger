@@ -2,7 +2,7 @@ import string, re
 import pickle
 from project.server.main.FoR import set_FoR
 from project.server.main.utils import download_file, get_aggregate
-from project.server.main.utils_swift import upload_object, download_object
+from project.server.main.utils_swift import conn, upload_object, download_object
 import pandas as pd
 import fasttext
 from sklearn.model_selection import train_test_split
@@ -12,30 +12,40 @@ import os
 PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
 
-def calibrate_pubmed():
+def calibrate_pubmed(is_stratified):
     try:
         issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
         assert(len(issn_dict_health)>1000)
     except:
+        print("getting FoR", flush=True)
         set_FoR()
     issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
-    calibrate("pubmed", issn_dict_health)
+    sample_data = None
+    calibrate("pubmed", issn_dict_health, is_stratified)
 
-def dualize_dict(input_dict):
+def dualize_dict(input_dict, is_global):
     new_dict = {}
     for k in input_dict:
         for e in input_dict[k]:
-            if e not in new_dict:
-                new_dict[e] = []
-            if k not in new_dict[e]:
-                new_dict[e].append(k)
+            current_key = e
+            if is_global:
+                current_key = 'global'
+            if current_key not in new_dict:
+                new_dict[current_key] = []
+            if k not in new_dict[current_key]:
+                new_dict[current_key].append(k)
     return new_dict
 
-def calibrate(collection, issn_map):
-    sampling_size = 1000 # per category
-
-    field_map = dualize_dict(issn_map)
+def sample(collection, issn_map, is_stratified):
+    if is_stratified:
+        sampling_size = 50000 # per category
+        field_map = dualize_dict(issn_map, is_global = False)
+    else:
+        sampling_size = 1000000
+        field_map = dualize_dict(issn_map, is_global = True)
     data_field = []
+    tmp_file_to_del = []
+    sample_data = f"{PV_MOUNT}sample_data_{collection}_strat{is_stratified}_{sampling_size}.json"
     for field in field_map:
         issns = field_map[field]
         pipeline = [
@@ -53,13 +63,28 @@ def calibrate(collection, issn_map):
             }
         }
         ]
+        url_data = get_aggregate(collection, pipeline, field.replace(' ',''))
+        tmp_file_to_del.append(url_data.split('/')[-1])
+        layer_data = f"{PV_MOUNT}layer_data.json"
+        download_object("tmp", url_data.split('/')[-1], layer_data)
+        os.system(f"cat {layer_data} >> {sample_data}")
+        os.system(f"rm -rf {layer_data}")
+        #data_field.append(pd.read_json(sample_data, orient="records", lines=True).to_dict(orient='records'))
+    #data = pd.concat(data_field)
+    upload_object("sampling", sample_data)        
 
-        url_data = get_aggregate(collection, pipeline, field)
-        sample_data = f"{PV_MOUNT}sample_data.json"
-        download_object("tmp", url_data.split('/')[-1], sample_data)
-        data_field.append(pd.read_json(sample_data, orient="records", lines=True).to_dict(orient='records'))
 
-    data = pd.concat(data_field)
+    for f in tmp_file_to_del:
+        conn.delete_object("tmp", f)
+
+    return sample_data
+
+
+def calibrate(collection, issn_map, is_stratified, sample_data = None):
+    if sample_data is None:
+        sample_data = sample(collection, issn_map, is_stratified)
+    data = pd.read_json(sample_data, orient="records", lines=True).to_dict(orient='records')
+    #download_object("tmp", sample_data.split('/')[-1], sample_data)
     print("len data = "+str(len(data)), flush=True)
     print("len issn_map = "+str(len(issn_map)), flush=True)
     for elt in data:
@@ -88,7 +113,7 @@ def calibrate(collection, issn_map):
             outfile[f].close()
 
         for f in ['title', 'abstract', 'keywords', 'mesh_headings', 'journal_title']:
-            outfile = open(f"{PV_MOUNT}{collection}_{data_type}_{f}.txt", "a+")
+            outfile[f] = open(f"{PV_MOUNT}{collection}_{data_type}_{f}.txt", "a+")
             print(f, flush=True)
 
             if data_type == "train":
@@ -109,7 +134,11 @@ def calibrate(collection, issn_map):
 
                 if f == "abstract" and len(current_words.split(" ")) < 20:
                     continue
-                if f == "title" and len(current_words.split(" ")) < 10:
+                elif f == "title" and len(current_words.split(" ")) < 10:
+                    continue
+                elif len(current_words.split(" ")) < 2:
+                    continue
+                elif len(current_words) < 5:
                     continue
 
                 current_words = normalize(current_words)
@@ -120,8 +149,8 @@ def calibrate(collection, issn_map):
 
                 newline = current_words + " " + tags + "\n"
 
-                outfile.write(newline)
-            outfile.close()
+                outfile[f].write(newline)
+            outfile[f].close()
             print(flush=True)
 
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
@@ -129,19 +158,18 @@ def calibrate(collection, issn_map):
 
         model = fasttext.train_supervised(f'{PV_MOUNT}{collection}_train_{f}.txt',
                                        wordNgrams = 2,
-                                       lr = 0.05,
-                                       minCount = 100,
-                                       dim = 10,
+                                       minCount = 20,
+                                       loss='ova',
                                       # pretrainedVectors = "wiki-news-300d-1M.vec",
-                                       epoch = 25)
-        model_filename = f"{PV_MOUNT}{collection}_model_{f}.model"
+                                       epoch = 50)
+        model_filename = f"{PV_MOUNT}{collection}_model_{f}_strat{is_stratified}.model"
         model.save_model(model_filename)
         upload_object("models", model_filename)        
 
-        print(model.test(f'{PV_MOUNT}{collection}_test_{f}.txt'), flush=True)
-        print(model.test_label(f'{PV_MOUNT}{collection}_test_{f}.txt'), flush=True)
-        print(flush = True)
-        print("*************", flush=True)
-        print(flush=True)
+        test = model.test(f'{PV_MOUNT}{collection}_test_{f}.txt', k=-1, threshold=0.5)
+        precision = test[1]
+        recall = test[2]
+        f1 = 2*(recall * precision) / (recall + precision)
+        print(f"precision: {precision}, recall: {recall}, f1: {f1}", flush=True)
 
 

@@ -14,7 +14,7 @@ def get_aggregate(collection, pipeline, output):
                       json={"pipeline": pipeline, "collection": collection, "output": output})
     task_id = r.json()["data"]["task_id"]
     print(f"task_id {task_id}", flush=True)
-    for i in range(1, 500):
+    for i in range(1, 50000):
         r_task = requests.get(f"{url_upw}/tasks/{task_id}").json()
         status = r_task.get('data', {}).get('task_status')
         if status not in ["finished", "failed"]:
