@@ -20,50 +20,86 @@ def init():
 
 def bsso_classify(elems):
     for e in elems:
-        fields = {"bsso_fields": detect_field(e)}
+        fields = {"bsso_classification": detect_field(e)}
         e.update(fields)
     return elems
 
-def detect_field(elt):
-   
-    if len(models) < 5:
-        init()
+def dedup_sort(x):
+    y = list(set([e for e in x if e]))
+    y.sort()
+    return y
 
+def detect_field(elt):
+    
+    weights={'journal_title': 1.5, 'title': 1, 'abstract': 1, 'keywords': 1, 'mesh_headings': 1}
+    
     results = []
+    results_journal = {}
+    res = {}
+    fields_predected = {}
+    
+    prediction_journal_title = []
     
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
-
-        current_words = elt.get(f)
-        
+        current_words = elt.get(f) 
         if current_words is None:
             continue
         if isinstance(current_words, list):
             current_words = " ".join(current_words)
- 
-        if len(current_words)<10:
+
+        if f == "abstract" and len(current_words.split(" ")) < 20:
+                continue
+        elif f == "title" and len(current_words.split(" ")) < 10:
+            continue
+        elif len(current_words.split(" ")) < 2:
+            continue
+        elif len(current_words) < 5:
             continue
 
         current_words = normalize(current_words).replace("\n", " ")
-    
-        current_prediction = models[f].predict(current_words, 2)
-        results.append(current_prediction)
+
+        current_prediction = models[f].predict(current_words,  k=-1, threshold=0.5)
         
-    final_res = []
-    for r in results:
-        score1 = r[1][0]
-        score2 = r[1][1]
-        if (score1 + score2) > 0.95 and (score1 - score2)< 0.10:
-            final_res = r[0]
+        res[f] = current_words
+        res[f"{f}_prediction"] = current_prediction
+
+        #print(f, current_words, current_prediction)
+
+        results.append({"labels": current_prediction[0], "scores": current_prediction[1], "model": f})
+        
+        
+        for k, pred in enumerate(list(current_prediction[0])):
+            pred = pred.replace('__label__', '').replace('_', ' ')
+            if pred not in fields_predected:
+                fields_predected[pred] = {"nb": 0, "models":[], "scores":[], "weighted_score": 0, "field": pred}
+            fields_predected[pred]["nb"] += 1
+            fields_predected[pred]["models"].append(f)
+            fields_predected[pred]["scores"].append(current_prediction[1][k])
+            fields_predected[pred]["weighted_score"] += weights[f] #* current_prediction[1][k]
             
-    if len(final_res) > 0:
-        final_res = [w.replace('__label__', '').replace('_', ' ') for w in final_res]
-        return final_res
+            if f == "journal_title":
+                prediction_journal_title.append(pred)
     
-    current_max = 0
-    for r in results:
-        if r[1][0] > current_max:
-            final_res = [r[0][0]]
-            current_max = r[1][0]
-    
-    final_res = [w.replace('__label__', '').replace('_', ' ') for w in final_res]
-    return final_res
+    sorted_res = sorted(fields_predected.items(), key=lambda item: item[1]["weighted_score"])
+    sorted_res.reverse()
+    if sorted_res:
+        max_weighted = sorted_res[0][1]["weighted_score"]
+        ans = {"field":[], "models":[], "weighted_score": max_weighted}
+        for k in sorted_res:
+            if k[1]["weighted_score"] != max_weighted:
+                continue
+            ans["field"].append(k[1]["field"])
+            ans["models"].append(";".join(dedup_sort(k[1]["models"])))
+
+        for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
+            ans[f] = elt.get(f) 
+            
+        ans["field"] = dedup_sort(ans["field"])
+        
+        ans["models"] = dedup_sort(ans["models"])
+        
+        ans["field_journal_title"] =  prediction_journal_title
+        return ans
+        
+    return {}
+
