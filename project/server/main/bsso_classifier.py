@@ -13,6 +13,8 @@ models = {}
 
 os.system("mkdir -p /src/models/")
 
+models = {}
+
 def init():
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
         model_name = f"/src/models/pubmed_model_{f}.model"
@@ -35,6 +37,9 @@ def dedup_sort(x):
 
 def detect_field(elt):
     
+    if len(models) < 5:
+        init()
+
     weights={'journal_title': 1.5, 'title': 1, 'abstract': 1, 'keywords': 1, 'mesh_headings': 1}
     
     results = []
@@ -95,8 +100,8 @@ def detect_field(elt):
             ans["field"].append(k[1]["field"])
             ans["models"].append(";".join(dedup_sort(k[1]["models"])))
 
-        for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
-            ans[f] = elt.get(f) 
+        #for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
+        #    ans[f] = elt.get(f) 
             
         ans["field"] = dedup_sort(ans["field"])
         
