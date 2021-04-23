@@ -3,3 +3,5 @@ models/*
 *.mypy_cache*
 .idea
 venv
+k8s/env*
+doc/out*
