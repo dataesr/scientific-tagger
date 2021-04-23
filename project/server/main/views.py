@@ -2,7 +2,7 @@ import redis
 from rq import Queue, Connection
 from flask import render_template, Blueprint, jsonify, request, current_app
 
-from project.server.main.tasks import create_task_classify
+from project.server.main.tasks import create_task_classify, create_task_calibrate
 
 main_blueprint = Blueprint("main", __name__,)
 
@@ -31,10 +31,26 @@ def run_task_classify_one():
     response_object = create_task_classify(args)
     return jsonify(response_object), 202
 
+
+@main_blueprint.route("/calibrate", methods=["POST"])
+def run_task_calibrate():
+    args = request.get_json(force=True)
+    print(args, flush=True)
+    with Connection(redis.from_url(current_app.config["REDIS_URL"])):
+        q = Queue("tagger", default_timeout=216000)
+        task = q.enqueue(create_task_calibrate, args)
+    response_object = {
+        "status": "success",
+        "data": {
+            "task_id": task.get_id()
+        }
+    }
+    return jsonify(response_object), 202
+
 @main_blueprint.route("/tasks/<task_id>", methods=["GET"])
 def get_status(task_id):
     with Connection(redis.from_url(current_app.config["REDIS_URL"])):
-        q = Queue()
+        q = Queue("tagger")
         task = q.fetch_job(task_id)
     if task:
         response_object = {

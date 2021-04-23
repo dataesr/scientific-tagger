@@ -6,9 +6,9 @@ from project.server.main.utils import download_file
 import pickle
 import os
 
-os.system("mkdir -p /src/models")
+os.system("mkdir -p /src/models/")
 if os.path.exists("/src/models/all_categ_revue.pkl") is False:
-    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/all_categ_revue.pkl", "/src/models/")
+    download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/all_categ_revue.pkl", "/src/models/all_categ_revue.pkl")
 all_categ_revue = pickle.load(open('/src/models/all_categ_revue.pkl', 'rb'))
 
 def get_categ_from_source(source, top=1):
