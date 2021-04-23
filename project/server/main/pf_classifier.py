@@ -4,7 +4,13 @@ from project.server.main.utils_str import normalize
 from project.server.main.utils import download_file
 import os
 
-os.system("mkdir -p /src/models/")
+
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
+os.system("mkdir -p /src/models")
+
 
 project_id = os.getenv("OS_TENANT_ID")
 project_id = "32c5d10cb0fe4519b957064a111717e3"
@@ -29,7 +35,7 @@ def get_pf_label(title, nb_top = 10):
     if not isinstance(title, str) or title is None or len(title) == 0:
         return "unknown"
     title_norm = normalize(title) #lower
-    print(f"get_pf_label {title} ==> {title_norm}", flush=True)
+    logger.debug(f"get_pf_label {title} ==> {title_norm}", flush=True)
     prediction = model["pf"].predict(title_norm,nb_top)
     return prediction
 
@@ -37,14 +43,14 @@ def get_pf_label(title, nb_top = 10):
 
 def pf_classify(elems, nb_top = 10):
     for e in elems:
-        print(e, flush=True)
+        logger.debug(e, flush=True)
         if 'doi' in e and 'title' not in e or 'journal_name' not in e:
-            print("should enrich metadata", flush=True)
+            logger.debug("should enrich metadata", flush=True)
             continue
 
         if 'title' in e:
             pf_labels = get_pf_label(e['title'], nb_top)
-            print(pf_labels, flush=True)
+            logger.debug(pf_labels, flush=True)
             pf_classif = []
             scores = list(pf_labels[1])
             for ix, label in enumerate(list(pf_labels[0])):

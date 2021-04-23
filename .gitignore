@@ -1,3 +1,5 @@
 notebooks/*
 models/*
 *.mypy_cache*
+.idea
+venv

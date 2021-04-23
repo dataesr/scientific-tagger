@@ -3,6 +3,10 @@ from project.server.main.utils_str import normalize
 from project.server.main.utils import download_file
 import os
 
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
 project_id = os.getenv("OS_TENANT_ID")
 project_id = "32c5d10cb0fe4519b957064a111717e3"
 models = {}
@@ -14,9 +18,9 @@ def init():
         model_name = f"/src/models/pubmed_model_{f}.model"
         if os.path.exists(model_name) is False:
             download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}.model", model_name)
-        print(f"loading model {model_name}", flush=True)
+        logger.debug(f"loading model {model_name}", flush=True)
         models[f] = fasttext.load_model(model_name)
-        print("nb labels : {}".format(models[f].get_labels()), flush=True)
+        logger.debug("nb labels : {}".format(models[f].get_labels()), flush=True)
 
 def bsso_classify(elems):
     for e in elems:
