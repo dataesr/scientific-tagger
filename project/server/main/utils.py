@@ -4,6 +4,9 @@ import shutil
 import os
 import re
 import time
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
 
 PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
@@ -13,7 +16,7 @@ def get_aggregate(collection, pipeline, output):
     r = requests.post(f"{url_upw}/aggregate_mongo", 
                       json={"pipeline": pipeline, "collection": collection, "output": output})
     task_id = r.json()["data"]["task_id"]
-    print(f"task_id {task_id}", flush=True)
+    logger.debug(f"task_id {task_id}")
     for i in range(1, 50000):
         r_task = requests.get(f"{url_upw}/tasks/{task_id}").json()
         status = r_task.get('data', {}).get('task_status')
@@ -50,7 +53,7 @@ def download_file(url, destination):
             local_filename = getFilename_fromCd(r.headers.get('content-disposition')).replace('"', '')
         except:
             local_filename = url.split('/')[-1]
-        logger.debug(f"start downloading {local_filename} at {start}", flush=True)
+        logger.debug(f"start downloading {local_filename} at {start}")
         #local_filename = f"{PV_MOUNT}{local_filename}"
         local_filename = destination
 
@@ -58,6 +61,6 @@ def download_file(url, destination):
             shutil.copyfileobj(r.raw, f, length=16*1024*1024)
     end = datetime.datetime.now()
     delta = end - start
-    logger.debug(f"end download in {delta}", flush=True)
+    logger.debug(f"end download in {delta}")
     return f"{local_filename}"
 

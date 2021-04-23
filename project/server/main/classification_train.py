@@ -8,6 +8,9 @@ import fasttext
 from sklearn.model_selection import train_test_split
 from project.server.main.utils_str import normalize
 import os
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
 
 PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
@@ -17,7 +20,7 @@ def calibrate_pubmed(is_stratified):
         issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
         assert(len(issn_dict_health)>1000)
     except:
-        print("getting FoR", flush=True)
+        logger.debug("getting FoR")
         set_FoR()
     issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
     sample_data = None
@@ -85,8 +88,8 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
         sample_data = sample(collection, issn_map, is_stratified)
     data = pd.read_json(sample_data, orient="records", lines=True).to_dict(orient='records')
     #download_object("tmp", sample_data.split('/')[-1], sample_data)
-    print("len data = "+str(len(data)), flush=True)
-    print("len issn_map = "+str(len(issn_map)), flush=True)
+    logger.debug("len data = "+str(len(data)))
+    logger.debug("len issn_map = "+str(len(issn_map)))
     for elt in data:
         if '_id' in elt:
             del elt['_id']
@@ -106,7 +109,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
     data_train, data_test = train_test_split(data_with_label, test_size = 0.1)
 
     for data_type in ["train", "test"]:
-        print(data_type, flush=True)
+        logger.debug(data_type)
         outfile = {}
         for f in ['title', 'abstract', 'keywords', 'mesh_headings', 'journal_title']:
             outfile[f] = open(f"{PV_MOUNT}{collection}_{data_type}_{f}.txt", "w")
@@ -114,7 +117,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
 
         for f in ['title', 'abstract', 'keywords', 'mesh_headings', 'journal_title']:
             outfile[f] = open(f"{PV_MOUNT}{collection}_{data_type}_{f}.txt", "a+")
-            print(f, flush=True)
+            logger.debug(f)
 
             if data_type == "train":
                 current_data = data_train
@@ -123,7 +126,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
 
             for ix, elt in enumerate(current_data):
                 if ix % 100000 == 0:
-                    print(ix, end=',', flush=True)
+                    logger.debug(ix, end=',')
 
                 current_words = elt.get(f)
                 if current_words is None:
@@ -151,10 +154,9 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
 
                 outfile[f].write(newline)
             outfile[f].close()
-            print(flush=True)
 
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
-        print("training "+f, flush=True)
+        logger.debug("training "+f)
 
         model = fasttext.train_supervised(f'{PV_MOUNT}{collection}_train_{f}.txt',
                                        wordNgrams = 2,
@@ -170,6 +172,6 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
         precision = test[1]
         recall = test[2]
         f1 = 2*(recall * precision) / (recall + precision)
-        print(f"precision: {precision}, recall: {recall}, f1: {f1}", flush=True)
+        logger.debug(f"precision: {precision}, recall: {recall}, f1: {f1}")
 
 

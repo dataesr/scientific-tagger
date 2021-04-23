@@ -35,7 +35,7 @@ def get_pf_label(title, nb_top = 10):
     if not isinstance(title, str) or title is None or len(title) == 0:
         return "unknown"
     title_norm = normalize(title) #lower
-    logger.debug(f"get_pf_label {title} ==> {title_norm}", flush=True)
+    logger.debug(f"get_pf_label {title} ==> {title_norm}")
     prediction = model["pf"].predict(title_norm,nb_top)
     return prediction
 
@@ -43,14 +43,14 @@ def get_pf_label(title, nb_top = 10):
 
 def pf_classify(elems, nb_top = 10):
     for e in elems:
-        logger.debug(e, flush=True)
+        logger.debug(e)
         if 'doi' in e and 'title' not in e or 'journal_name' not in e:
-            logger.debug("should enrich metadata", flush=True)
+            logger.debug("should enrich metadata")
             continue
 
         if 'title' in e:
             pf_labels = get_pf_label(e['title'], nb_top)
-            logger.debug(pf_labels, flush=True)
+            logger.debug(pf_labels)
             pf_classif = []
             scores = list(pf_labels[1])
             for ix, label in enumerate(list(pf_labels[0])):

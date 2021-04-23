@@ -40,7 +40,7 @@ def test_sdg(asjc, ti_abs_kw):
 
     sdg = []
     for ix, r in enumerate(res):
-        logger.debug(ix, flush=True)
+        logger.debug(ix)
         if len(r)>0 and r not in sdg:
             sdg.append(r)
     return {"sdg_classification": sdg}

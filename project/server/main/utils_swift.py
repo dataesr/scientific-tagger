@@ -34,7 +34,7 @@ conn = swiftclient.Connection(
 
 def upload_object(container, filename):
     object_name = filename.split('/')[-1]
-    print(f"uploading {filename} in {container} as {object_name}", flush=True)
+    logger.debug(f"uploading {filename} in {container} as {object_name}")
     cmd = f"swift --os-auth-url https://auth.cloud.ovh.net/v3 --auth-version 3\
       --key {key} --user {user} \
       --os-user-domain-name Default \
@@ -48,7 +48,7 @@ def upload_object(container, filename):
     return f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/{container}/{object_name}"
 
 def download_object(container, filename, out):
-    print(f"downloading {filename} from {container} to {out}", flush=True)
+    logger.debug(f"downloading {filename} from {container} to {out}")
     cmd = f"swift --os-auth-url https://auth.cloud.ovh.net/v3 --auth-version 3\
       --key {key} --user {user} \
       --os-user-domain-name Default \
@@ -74,7 +74,7 @@ def get_objects(container, path):
     return df.to_dict("records")
     
 def set_objects(all_objects, container, path):
-    logger.debug(f"setting object {container} {path}",end=':', flush=True)
+    logger.debug(f"setting object {container} {path}",end=':')
     if isinstance(all_objects, list):
         all_notices_content = pd.DataFrame(all_objects)
     else:
@@ -83,7 +83,7 @@ def set_objects(all_objects, container, path):
     with gzip.GzipFile(mode='w', fileobj=gz_buffer) as gz_file:
         all_notices_content.to_json(TextIOWrapper(gz_file, 'utf8'), orient='records')
     conn.put_object(container, path, contents=gz_buffer.getvalue())
-    logger.debug(f"done",end=':', flush=True)
+    logger.debug(f"done",end=':')
     return
 
 

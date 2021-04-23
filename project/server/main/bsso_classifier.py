@@ -18,9 +18,9 @@ def init():
         model_name = f"/src/models/pubmed_model_{f}.model"
         if os.path.exists(model_name) is False:
             download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}.model", model_name)
-        logger.debug(f"loading model {model_name}", flush=True)
+        logger.debug(f"loading model {model_name}")
         models[f] = fasttext.load_model(model_name)
-        logger.debug("nb labels : {}".format(models[f].get_labels()), flush=True)
+        logger.debug("nb labels : {}".format(models[f].get_labels()))
 
 def bsso_classify(elems):
     for e in elems:
