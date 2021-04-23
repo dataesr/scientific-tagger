@@ -1,9 +1,13 @@
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
 CONFIDENCE_THRESHOLD = 0.15
 
 def get_bso_category(prediction, is_strict = True, verbose=False):
     
     if(verbose):
-        print(prediction)
+        logger.debug(prediction)
             
     for i, k in enumerate(prediction[0]):
         

@@ -26,6 +26,10 @@ def get_aggregate(collection, pipeline, output):
             return None
     return None
 
+from project.server.main.logger import get_logger
+
+logger = get_logger(__name__)
+
 def getFilename_fromCd(cd):
     """
     Get filename from content-disposition
@@ -46,12 +50,14 @@ def download_file(url, destination):
             local_filename = getFilename_fromCd(r.headers.get('content-disposition')).replace('"', '')
         except:
             local_filename = url.split('/')[-1]
-        print(f"start downloading {local_filename} at {start}", flush=True)
+        logger.debug(f"start downloading {local_filename} at {start}", flush=True)
         #local_filename = f"{PV_MOUNT}{local_filename}"
         local_filename = destination
+
         with open(local_filename, 'wb') as f:
             shutil.copyfileobj(r.raw, f, length=16*1024*1024)
     end = datetime.datetime.now()
     delta = end - start
-    print(f"end download in {delta}", flush=True)
+    logger.debug(f"end download in {delta}", flush=True)
     return f"{local_filename}"
+
