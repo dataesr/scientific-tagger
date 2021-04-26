@@ -37,4 +37,5 @@ def create_task_classify(arg):
 
 def create_task_calibrate(arg):
     is_stratified = arg.get("stratified", True)
-    calibrate_pubmed(is_stratified)
+    sample_data_file = arg.get("sample_data_file")
+    calibrate_pubmed(is_stratified, sample_data_file)

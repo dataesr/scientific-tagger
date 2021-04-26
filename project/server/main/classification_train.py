@@ -15,7 +15,7 @@ logger = get_logger(__name__)
 PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
 
-def calibrate_pubmed(is_stratified):
+def calibrate_pubmed(is_stratified, sample_data_file):
     try:
         issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
         assert(len(issn_dict_health)>1000)
@@ -23,8 +23,8 @@ def calibrate_pubmed(is_stratified):
         logger.debug("getting FoR")
         set_FoR()
     issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
-    sample_data = None
-    calibrate("pubmed", issn_dict_health, is_stratified)
+
+    calibrate("pubmed", issn_dict_health, is_stratified, sample_data_file = sample_data_file)
 
 def dualize_dict(input_dict, is_global):
     new_dict = {}
@@ -83,9 +83,12 @@ def sample(collection, issn_map, is_stratified):
     return sample_data
 
 
-def calibrate(collection, issn_map, is_stratified, sample_data = None):
-    if sample_data is None:
+def calibrate(collection, issn_map, is_stratified, sample_data_file = None):
+    if sample_data_file is None:
         sample_data = sample(collection, issn_map, is_stratified)
+    else:
+        sample_data = f"{PV_MOUNT}{sample_data_file}"
+        download_object("sampling", sample_data_file, sample_data)
     data = pd.read_json(sample_data, orient="records", lines=True).to_dict(orient='records')
     #download_object("tmp", sample_data.split('/')[-1], sample_data)
     logger.debug("len data = "+str(len(data)))
@@ -126,7 +129,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data = None):
 
             for ix, elt in enumerate(current_data):
                 if ix % 100000 == 0:
-                    logger.debug(ix, end=',')
+                    logger.debug(ix)
 
                 current_words = elt.get(f)
                 if current_words is None:
