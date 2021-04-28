@@ -1,6 +1,6 @@
 import string, re
 import pickle
-from project.server.main.FoR import set_FoR
+#from project.server.main.FoR import set_FoR
 from project.server.main.utils import download_file, get_aggregate
 from project.server.main.utils_swift import conn, upload_object, download_object
 import pandas as pd
@@ -21,7 +21,8 @@ def calibrate_pubmed(is_stratified, sample_data_file):
         assert(len(issn_dict_health)>1000)
     except:
         logger.debug("getting FoR")
-        set_FoR()
+        #set_FoR()
+        download_object("models", "issn_dict_health.pkl", f"{PV_MOUNT}issn_dict_health.pkl") 
     issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
 
     calibrate("pubmed", issn_dict_health, is_stratified, sample_data_file = sample_data_file)
@@ -101,7 +102,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data_file = None):
         for issn_type in ['issn_electronic', 'issn_print']:
             issn = elt[issn_type]
             if issn in issn_map:
-                current_label_text += issn_map[issn][0:1]
+                current_label_text += issn_map[issn]
 
         current_label_text = list(set(current_label_text))
 
@@ -109,7 +110,7 @@ def calibrate(collection, issn_map, is_stratified, sample_data_file = None):
 
     data_with_label = [ e for e in data if len(e['labels_text'])]
 
-    data_train, data_test = train_test_split(data_with_label, test_size = 0.1)
+    data_train, data_test = train_test_split(data_with_label, test_size = 85000, random_state = 0)
 
     for data_type in ["train", "test"]:
         logger.debug(data_type)
@@ -165,7 +166,6 @@ def calibrate(collection, issn_map, is_stratified, sample_data_file = None):
                                        wordNgrams = 2,
                                        minCount = 20,
                                        loss='ova',
-                                      # pretrainedVectors = "wiki-news-300d-1M.vec",
                                        epoch = 50)
         model_filename = f"{PV_MOUNT}{collection}_model_{f}_strat{is_stratified}.model"
         model.save_model(model_filename)
