@@ -6,6 +6,11 @@ start:
 	docker-compose up -d
 	@echo Scientific Tagger started http://localhost:5004
 
+stop:
+	@echo Matcher stopping...
+	docker-compose down
+	@echo Matcher stopped
+
 release:
 	echo "__version__ = '$(VERSION)'" > project/__init__.py
 	git commit -am '[release] version $(VERSION)'
