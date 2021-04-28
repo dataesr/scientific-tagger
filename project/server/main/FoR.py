@@ -27,6 +27,7 @@ def set_FoR():
 
     #curl https://www.arc.gov.au/file/10549/download?token=Sbfb2a9n #-O FoR.xlsx
     FoR_file = download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/models/FoR.xlsx", f"{PV_MOUNT}FoR.xlsx")
+    #FoR_file="FoR.xlsx"
 
     xl = pd.ExcelFile(FoR_file)
 
@@ -57,6 +58,8 @@ def set_FoR():
 
         fors = []
         fors_health = []
+        has_other = False
+        has_health = False
         for x in range(1,4):
             for_code = row['FoR {}'.format(x)]
             if pd.isnull(for_code):
@@ -70,14 +73,34 @@ def set_FoR():
 
             if for_code not in for_dict:
                 continue
-            fors.append(for_dict[for_code])
+
+            if for_dict[for_code] not in fors:
+                fors.append(for_dict[for_code])
 
             if for_code in for_code_health:
-                fors_health.append(for_dict[for_code])
+                candidate = for_dict[for_code]
+                if candidate not in fors_health:
+                    fors_health.append(candidate)
+                    has_health = True
             elif for_code[0:2] in for_code_health:
-                fors_health.append(for_dict[for_code[0:2]])
+                candidate = for_dict[for_code[0:2]]
+                if candidate not in fors_health:
+                    fors_health.append(candidate)
+                    has_health = True
             elif for_code[0:2] in ["06", "11"]:
-                fors_health.append("Other "+ for_dict[for_code[0:2]])
+                candidate = "Other "+ for_dict[for_code[0:2]]
+                if candidate not in fors_health:
+                    fors_health.append(candidate)
+                    has_other = True
+
+        if has_health:
+            for k in fors_health.copy():
+                if "Other " in k:
+                    print(issns)
+                    print(fors_health)
+                    fors_health.remove(k)
+                    print(fors_health)
+                    print()
 
         for issn in issns:
             issn_dict[issn] = fors
