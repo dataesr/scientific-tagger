@@ -170,7 +170,7 @@ In our approach, we assume rich metadata is available, in particular metadata th
 | MeSH | 69.1%
 | at least 1 among abstract, keywords, MeSH | 96.6%
 | at least 2 among abstract, keywords, MeSH | 80.9%
-| all 3 metadata | 43.4%
+| all 3 metadata | 43.3%
 
 So the coverage is far from perfect, but in more than 80%, 2 out of 3 key metadata are available.
 
@@ -204,8 +204,8 @@ We report the f1 score of each model in Table 7.
 
 | Sampling technique | Journal title model | Title model | Abstract model | Keywords model | MeSH model
 |---|---|---|---|---|---
-| Random  | 99.7 | 40.7 | 44.8 | 43.9 | 42.9
-| Stratified | 99.9 | 52.2 | 56.1 | 53 | 52.5
+| Random  | 99.7 | 40.8 | 44.7 | 43.4 | 42.9
+| Stratified | 99.9 | 52.4 | 56.3 | 53.5 | 52.6
 
 
 We observe that the stratified sampling approach gives overall better performance on each model.
@@ -218,13 +218,29 @@ Apart from the journal-title model, the performance for the other model could se
 
 Fasttext is a word embeddings model, meaning that each word is represented by a numeric vector, in our case in dimension 100. The strength of this type of model is that the numeric distance between these vectors can be interpreted as a semantic distance.
 
-The fasttext library comes with two handy functions to explore the word embeddings: *get_nearest_neighbors* and *get_analogies*. The first function lists the words whose embeddings are the closest to the input. For instance, using the model calibrated on titles, the 3 nearest neighbors of "pathogen" are "ixodes", "virus" and "host" (the Ixodes are a type of ticks, known as disease vectors).
+The fasttext library comes with two handy functions to explore the word embeddings: *get_nearest_neighbors* and *get_analogies*. The first function lists the words whose embeddings are the closest to the input. For instance, using the model calibrated on titles, the 3 nearest neighbors of "infants" are "pregnancies", "childhood" and "children".
 
-![fasttext 'nearest neighbors' functions to explore word embeddings](https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/images/pathogen.png){ width=350 }
+```python
+model.get_nearest_neighbors("infants")[0:3]
+```
 
-The other function enables the user to play around with word analogies. Fasttext documentation [@facebook_fasttext_nodate] gives the example of the triplet ("berlin", "germany", "france"), which can be interpreted as: "What is to France what Berlin is to Germany ?". In fasttext documentation, the first result given by the model they use is "paris". We played the same game with the model calibrated on titles, with the triplet ("hypertension", "heart", "brain"). That is to say, according to the model we calibrated, what is to the brain what hypertension is for the heart? The two first results are "subarachnoid" and "seizures".
+```javascript
+[(0.9245744347572327, 'pregnancies'),
+ (0.905193030834198, 'childhood'),
+ (0.898639440536499, 'children')]
+```
 
-![fasttext 'analogy' functions to explore word embeddings](https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/images/hypertension.png){ width=400 }
+The other function enables the user to play around with word analogies. Fasttext documentation [@facebook_fasttext_nodate] gives the example of the triplet ("berlin", "germany", "france"), which can be interpreted as: "What is to France what Berlin is to Germany ?". In fasttext documentation, the first result given by the model they use is "paris". We played the same game with the model calibrated on titles, with the triplet ("hypertension", "heart", "brain"). That is to say, according to the model we calibrated, what is to the brain what hypertension is for the heart? The two first results are "stroke" and "aneurysms".
+
+```python
+model.get_analogies("hypertension", "heart", "brain")[0:3]
+```
+
+```javascript
+[(0.9260239005088806, 'stroke'),
+ (0.9155754446983337, 'aneurysms'),
+ (0.901538610458374, 'cerebral')]
+```
 
 ## 3.5 Classification inference
 
@@ -238,7 +254,7 @@ As expected, in the majority of the cases, the article-based prediction is the s
 However, a few things can be noticed.<br>
 All the articles with no prediction at the journal level are classified with the article-level approach.<br>
 The likelihood of a label change between the journal level and the article level is higher for some fields than others (in particular,  "Multidisciplinary" or "Other Medical and Health Services").
-For example, a publication whose title is "'Impact of an early childhood intervention on the home environment, and subsequent effects on child cognitive and emotional development: A secondary analysis.'", published in 'PloS one' was classified "Multidisciplinary" with a journal-based model and became classified "Psychology and Cognitive Sciences" with the combination of the models.
+For example, a publication whose title is 'Topography and behavioral relevance of the global signal in the human brain.', published in 'Scientific reports' was classified "Multidisciplinary" with a journal-based model and became classified "Psychology and Cognitive Sciences" with the combination of the models.
 Also, some transitions are more frequent, like "Physical Sciences" to "Engineering" or "Neurosciences" to "Psychology and Cognitive Sciences".
 
 # 4. Discussion and conclusion
