@@ -19,3 +19,11 @@ In your browser, you now have :
 ```shell
 kubectl apply -k k8s
 ```
+
+## Release
+It uses [semver](https://semver.org/).
+
+To create a new release, do
+```shell
+make release VERSION=x.x.x
+```
