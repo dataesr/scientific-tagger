@@ -22,3 +22,8 @@ docker-push:
 	docker push $(DOCKER_IMAGE_NAME):$(CURRENT_VERSION)
 	docker push $(DOCKER_IMAGE_NAME):latest
 	@echo Docker image pushed
+
+python-build:
+	@echo Building a python package
+	python setup.py sdist
+	@echo Python package built
