@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   web:
-    image: dataesr/scientific-tagger:1.0
+    image: dataesr/scientific-tagger:0.0.4
     privileged: true
     ports:
       - 5004:5000

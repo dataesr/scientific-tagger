@@ -1,6 +1,11 @@
 DOCKER_IMAGE_NAME=dataesr/scientific-tagger
 CURRENT_VERSION=$(shell cat project/__init__.py | grep -P '(\d\.?){3}' -o)
 
+start:
+	@echo Matcher starting...
+	docker-compose up -d
+	@echo Matcher started http://localhost:5004
+
 release:
 	echo "__version__ = '$(VERSION)'" > project/__init__.py
 	git commit -am '[release] version $(VERSION)'

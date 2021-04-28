@@ -54,7 +54,7 @@ spec:
             secretKeyRef:
               name: envsecret
               key: upw-api-key
-        image: dataesr/scientific-tagger:1.0
+        image: dataesr/scientific-tagger:0.0.4
         name: scientific-tagger-worker
         resources: {}
         securityContext:
