@@ -1,7 +1,27 @@
-notebooks/*
-models/*
+# Python
+*.pyc
 *.mypy_cache*
-.idea
+.mypy*
 venv
+notebooks/*
+
+# Unit tests
+.pytest_cache/
+
+# Kubernetes
 k8s/env*
+
+# IDE
+.idea
+.vscode
+
+# Logs
+*.log
+
+# Build
+dist
+*.egg-info
+
+# Data
+models/*
 doc/out*

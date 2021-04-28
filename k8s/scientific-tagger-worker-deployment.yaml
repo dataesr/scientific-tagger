@@ -18,8 +18,9 @@ spec:
     spec:
       containers:
       - args:
-        - /bin/sh
-        - start.sh
+        - python3
+        - manage.py
+        - run_worker
         env:
         - name: APP_SETTINGS
           value: project.server.config.DevelopmentConfig
@@ -53,7 +54,7 @@ spec:
             secretKeyRef:
               name: envsecret
               key: upw-api-key
-        image: dataesr/scientific-tagger:1.0
+        image: dataesr/scientific-tagger:0.0.4
         name: scientific-tagger-worker
         resources: {}
         securityContext:
