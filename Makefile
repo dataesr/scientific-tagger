@@ -2,9 +2,9 @@ DOCKER_IMAGE_NAME=dataesr/scientific-tagger
 CURRENT_VERSION=$(shell cat project/__init__.py | grep -P '(\d\.?){3}' -o)
 
 start:
-	@echo Matcher starting...
+	@echo Scientific Tagger starting...
 	docker-compose up -d
-	@echo Matcher started http://localhost:5004
+	@echo Scientific Tagger started http://localhost:5004
 
 release:
 	echo "__version__ = '$(VERSION)'" > project/__init__.py
@@ -22,3 +22,8 @@ docker-push:
 	docker push $(DOCKER_IMAGE_NAME):$(CURRENT_VERSION)
 	docker push $(DOCKER_IMAGE_NAME):latest
 	@echo Docker image pushed
+
+python-build:
+	@echo Building a python package
+	python setup.py sdist
+	@echo Python package built

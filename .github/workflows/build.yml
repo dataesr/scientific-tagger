@@ -12,6 +12,14 @@ jobs:
         id: tag
         run: |
           echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+      - name: 🐍 Build python package
+        run: make python-build
+      - name: 📦 Upload python package to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/scientific-tagger-${{ steps.tag.outputs.TAG_NAME }}.tar.gz
+          tag: ${{ github.ref }}
       - name : 🐋 Build docker image
         run: make docker-build
       - name: 🔑 Login docker
