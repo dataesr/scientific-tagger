@@ -1,5 +1,7 @@
 # Scientific tagger
 
+![Build](https://github.com/dataesr/scientific_tagger/actions/workflows/build.yml/badge.svg)
+
 The scientific taggers aims at proposing subject classification for scholarly publications. So the input is a list of publications, only some metadata are taken into account (title, journal title, abstract,keywords and MeSH), not the full-text for the time being. Several classifications are implemented:
 - Biomedical subject classification based on Fields of Research [documented here](https://github.com/dataesr/scientific_tagger/blob/main/doc/scientific_tagger.pdf)
 - Pascal and Francis tags
