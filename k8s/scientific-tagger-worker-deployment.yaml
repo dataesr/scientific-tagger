@@ -18,8 +18,9 @@ spec:
     spec:
       containers:
       - args:
-        - /bin/sh
-        - start.sh
+        - python3
+        - manage.py
+        - run_worker
         env:
         - name: APP_SETTINGS
           value: project.server.config.DevelopmentConfig

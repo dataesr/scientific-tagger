@@ -1,7 +1,6 @@
 version: '3.5'
 
 services:
-
   web:
     image: dataesr/scientific-tagger:1.0
     privileged: true
