@@ -28,7 +28,7 @@ spec:
           value: project.server.config.DevelopmentConfig
         - name: FLASK_DEBUG
           value: "1"
-        image: dataesr/scientific-tagger:0.0.4
+        image: dataesr/scientific-tagger:0.0.7
         name: scientific-tagger-web
         ports:
         - containerPort: 5000
