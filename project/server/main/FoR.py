@@ -96,11 +96,7 @@ def set_FoR():
         if has_health:
             for k in fors_health.copy():
                 if "Other " in k:
-                    print(issns)
-                    print(fors_health)
                     fors_health.remove(k)
-                    print(fors_health)
-                    print()
 
         for issn in issns:
             issn_dict[issn] = fors

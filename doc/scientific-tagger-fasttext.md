@@ -204,8 +204,8 @@ We report the f1 score of each model in Table 7.
 
 | Sampling technique | Journal title model | Title model | Abstract model | Keywords model | MeSH model
 |---|---|---|---|---|---
-| Random  | 99.7 | 40.8 | 44.7 | 43.4 | 42.9
-| Stratified | 99.9 | 52.4 | 56.3 | 53.5 | 52.6
+| Random  | 99.7 | 40.8 | 44.6 | 43.6 | 42.8
+| Stratified | 99.9 | 52.4 | 56.3 | 53.6 | 52.5
 
 
 We observe that the stratified sampling approach gives overall better performance on each model.
@@ -225,9 +225,9 @@ model.get_nearest_neighbors("infants")[0:3]
 ```
 
 ```javascript
-[(0.9245744347572327, 'pregnancies'),
- (0.905193030834198, 'childhood'),
- (0.898639440536499, 'children')]
+[(0.9249277710914612, 'pregnancies'),
+ (0.912368893623352, 'children'),
+ (0.9030213356018066, 'childhood')]
 ```
 
 The other function enables the user to play around with word analogies. Fasttext documentation [@facebook_fasttext_nodate] gives the example of the triplet ("berlin", "germany", "france"), which can be interpreted as: "What is to France what Berlin is to Germany ?". In fasttext documentation, the first result given by the model they use is "paris". We played the same game with the model calibrated on titles, with the triplet ("hypertension", "heart", "brain"). That is to say, according to the model we calibrated, what is to the brain what hypertension is for the heart? The two first results are "stroke" and "aneurysms".
@@ -237,9 +237,9 @@ model.get_analogies("hypertension", "heart", "brain")[0:3]
 ```
 
 ```javascript
-[(0.9260239005088806, 'stroke'),
- (0.9155754446983337, 'aneurysms'),
- (0.901538610458374, 'cerebral')]
+[(0.9254266619682312, 'stroke'),
+ (0.913159966468811, 'cerebral'),
+ (0.9120014905929565, 'aneurysms')]
 ```
 
 ## 3.5 Classification inference

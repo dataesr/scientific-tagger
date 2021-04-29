@@ -1,6 +1,6 @@
 import string, re
 import pickle
-#from project.server.main.FoR import set_FoR
+from project.server.main.FoR import set_FoR
 from project.server.main.utils import download_file, get_aggregate
 from project.server.main.utils_swift import conn, upload_object, download_object
 import pandas as pd
@@ -21,8 +21,8 @@ def calibrate_pubmed(is_stratified, sample_data_file):
         assert(len(issn_dict_health)>1000)
     except:
         logger.debug("getting FoR")
-        #set_FoR()
-        download_object("models", "issn_dict_health.pkl", f"{PV_MOUNT}issn_dict_health.pkl") 
+        set_FoR()
+        #download_object("models", "issn_dict_health.pkl", f"{PV_MOUNT}issn_dict_health.pkl") 
     issn_dict_health = pickle.load(open(f"{PV_MOUNT}issn_dict_health.pkl", "rb"))
 
     calibrate("pubmed", issn_dict_health, is_stratified, sample_data_file = sample_data_file)
