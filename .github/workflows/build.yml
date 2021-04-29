@@ -26,3 +26,6 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
       - name: 📦 Push docker image
         run: make docker-push
+      - name: 📢 Notify in slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"📦 New release <https://github.com/dataesr/scientific_tagger/releases/tag/${{ steps.tag.outputs.TAG_NAME }}|${{ steps.tag.outputs.TAG_NAME }}> in scientific_tagger"}' ${{ secrets.SLACK_WEBHOOK }}
