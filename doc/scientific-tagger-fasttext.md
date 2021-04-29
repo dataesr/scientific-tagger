@@ -9,7 +9,7 @@ institute:
   - mesri:
       name: 'French Ministry of Higher Education, Research and Innovation, Paris, France'
 bibliography: tagger.bib
-date: May 2021
+date: April 2021
 keywords:
   - open science
   - subject classification
@@ -100,11 +100,18 @@ We use a sample of 500,000 records published in 2019 from the Pubmed metadata to
 First, it appears that 18% of the publications in PubMed cannot be attached directly to a FoR code: indeed their ISSN is not in ERA data, so there is no correspondence between the ISSN and FoR codes.
 
 
-![Number of FoR matched to publications in Pubmed](https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/images/nb_for_pubmed.png){ width=400 }
+**Table 2: Number of FoR matched to publications in Pubmed (sample from 2019)**
+
+|Number of FoR|% of publications|
+|---|---|
+|No FoR| 18%|
+|1 FoR| 37%|
+|2 FoR| 23%|
+|3 FoR| 22%|
 
 At the 2-digits FoR code level, all the 150+ FoR codes are present in the Pubmed data (from FoR 11 "Medical and Health Sciences" for 52% of the papers to FoR 19 "Studies in Creative Arts and Writing" for less than 0.1% of the papers). Note that a paper can be attached to multiple FoR codes (up to 3).
 
-**Table 2: Distribution of the 2-digits FoR codes in Pubmed (sample from 2019)**
+**Table 3: Distribution of the 2-digits FoR codes in Pubmed (sample from 2019)**
 
 |FoR|FoR code| Percentage of publications |
 |----|----|----|
@@ -121,9 +128,9 @@ At the 2-digits FoR code level, all the 150+ FoR codes are present in the Pubmed
 Concerning the two main codes FoR 11 "Medical and Health Sciences" and FoR 06 "Biological Sciences", we look deeper into the 4-digits FoR codes. For the others, we selected only the FoR codes representing more than 3% of the papers in Pubmed.<br>
 With the same logic, for the 4-digits FoR codes in 11 - "Medical and Health Sciences" and 06 - "Biological Sciences", we selected those representing more than 2% of the papers, and grouping the others into "Other Medical and Health Sciences" and "Other Biological Sciences".
 
-After this selection process, we end up with the 17 fields presented in Table 3 to classify publications in Pubmed.
+After this selection process, we end up with the 17 fields presented in Table 4 to classify publications in Pubmed.
 
-**Table 3: Distribution of the selected fields in PubMed (sample from 2019)**
+**Table 4: Distribution of the selected fields in PubMed (sample from 2019)**
 
 |Class|FoR code|Percentage of publications
 |---|---|---|
@@ -145,9 +152,9 @@ After this selection process, we end up with the 17 fields presented in Table 3 
 | Paediatrics and Reproductive Medicine | 1114 | 2.6%
 | Microbiology | 0605 | 2.1%
 
-With this field selection, some publications do not get a field anymore (the publications whose ISSN are not the selected scope). However, this loss is very low (less than 1%) as shown in Table 4.
+With this field selection, some publications do not get a field anymore (the publications whose ISSN are not the selected scope). However, this loss is very low (less than 1%) as shown in Table 5.
 
-**Table 4: Number of fields matched to publications in Pubmed**
+**Table 5: Number of fields matched to publications in Pubmed**
 
 |Number of fields  | 2-digits FoR | Selected fields
 |---|---|---
@@ -161,7 +168,7 @@ With this field selection, some publications do not get a field anymore (the pub
 
 In our approach, we assume rich metadata is available, in particular metadata that can help infer a scientific discipline: title, abstract, keywords, MeSH (and journal title).  In the general case (on Crossref for example), for most of the publications, the abstract and keywords are not available. We look here at Pubmed metadata.
 
-**Table 5: Metadata availability in Pubmed (sample from 2019 publications)**
+**Table 6: Metadata availability in Pubmed (sample from 2019 publications)**
 
 | Metadata | Availability |
 |---|---|
@@ -178,15 +185,15 @@ Field-wise, there is of course a variety of situations as shown in Figure 2. How
 As a consequence, the situation is not perfect (100% availability would be a better scenario) but rich metadata (at least partially) remain available in the vast majority of the cases.
 
 
-![Proportion of publications with metadata available in Pubmed for the selected fields](https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/images/missing_meta.png){ width=400 }
+![Proportion of publications with metadata available in Pubmed for the selected fields](missing_meta.png){ width=400 }
 
 ## 3.3 Training data
 
 We used two training datasets of each 850,000 publications. Each of them is split for training and testing (90%, 10%). The first dataset is a random sample from the Pubmed metadata (with at least a selected field assigned). The second dataset is a stratified sample, each selected field representing an equal part of the total. 
 
-For each dataset, we trained 5 *fasttext* models, for each metadata type: title, abstract, keywords, MeSH, and journal-title. The training parameters are presented in Table 6, the other being set to default values. All the possible parameters and their effects are detailed in fasttext online documentation [@facebook_fasttext_nodate].
+For each dataset, we trained 5 *fasttext* models, for each metadata type: title, abstract, keywords, MeSH, and journal-title. The training parameters are presented in Table 7, the other being set to default values. All the possible parameters and their effects are detailed in fasttext online documentation [@facebook_fasttext_nodate].
 
-**Table 6: fasttext parameters used for training**
+**Table 7: fasttext parameters used for training**
 
 | Parameter | Value |
 |---|---|
@@ -196,11 +203,11 @@ For each dataset, we trained 5 *fasttext* models, for each metadata type: title,
 | minCount | 20
 
 Several metrics can measure the performance of a classifier. In particular, the precision computes the fraction of predicted classes that are relevant and the recall that computes the fraction of relevant classes that are successfully predicted. The f1 score combines precision and recall  (it is the harmonic mean of precision and recall).<br>
-We report the f1 score of each model in Table 7.
+We report the f1 score of each model in Table 8.
 
 \newpage
 
-**Table 7: f1 score of trained model**
+**Table 9: f1 score of trained model**
 
 | Sampling technique | Journal title model | Title model | Abstract model | Keywords model | MeSH model
 |---|---|---|---|---|---
@@ -247,7 +254,7 @@ model.get_analogies("hypertension", "heart", "brain")[0:3]
 We applied the classification method on 45,000 publications from Pubmed with a French affiliation. For each one, we computed the field inferred with only the journal title and the field predicted using the combination of the 5 models (one for each metadata). For each model, we keep only the predictions with a probability above 0.5. The probability of each tag is directly computed by the fasttext library.<br>
 We then look at the transition matrix between journal-based and article-based classification.
 
-![Transition matrix from journal-based to article-based classifier](https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/images/transition_matrix.png){ width=400 }
+![Transition matrix from journal-based to article-based classifier](transition_matrix.png){ width=400 }
 
 
 As expected, in the majority of the cases, the article-based prediction is the same as the journal level one.<br>
