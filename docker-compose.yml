@@ -1,6 +1,6 @@
 services:
   web:
-    image: dataesr/scientific-tagger:0.0.4
+    image: dataesr/scientific-tagger:0.0.7
     privileged: true
     ports:
       - 5004:5000
