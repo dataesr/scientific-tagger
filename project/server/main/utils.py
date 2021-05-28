@@ -12,7 +12,7 @@ PV_MOUNT = "/src/local_data/"
 os.system(f"mkdir -p {PV_MOUNT}")
 
 def get_aggregate(collection, pipeline, output):
-    url_upw = "http://unpaywall-web"
+    url_upw = os.getenv("PUBLICATIONS_MONGO_SERVICE")
     r = requests.post(f"{url_upw}/aggregate_mongo", 
                       json={"pipeline": pipeline, "collection": collection, "output": output})
     task_id = r.json()["data"]["task_id"]
