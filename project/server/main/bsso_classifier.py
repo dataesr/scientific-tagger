@@ -55,6 +55,8 @@ def detect_field(elt):
             continue
         if isinstance(current_words, list):
             current_words = " ".join(current_words)
+        if not isinstance(current_words, str):
+            continue
 
         if f == "abstract" and len(current_words.split(" ")) < 20:
                 continue
