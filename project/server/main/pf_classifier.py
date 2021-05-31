@@ -20,9 +20,9 @@ model={}
 def init():
 
     if os.path.exists("/src/models/model_pf.bin") is False:
-        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.bin", "/src/models/model_pf.bin")
+        download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.bin", "/src/models/model_pf.bin")
     if os.path.exists("/src/models/model_pf.vec") is False:
-        download_file("https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.vec", "/src/models/model_pf.vec")
+        download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/model_pf.vec", "/src/models/model_pf.vec")
 
     model_pf = fasttext.load_model('/src/models/model_pf.bin')
     model["pf"] = model_pf

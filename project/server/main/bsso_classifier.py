@@ -19,7 +19,7 @@ def init():
     for f in ['journal_title', 'title', 'abstract', 'keywords', 'mesh_headings']:
         model_name = f"/src/models/pubmed_model_{f}.model"
         if os.path.exists(model_name) is False:
-            download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}.model", model_name)
+            download_file(f"https://storage.gra.cloud.ovh.net/v1/AUTH_{project_id}/models/pubmed_model_{f}_stratTrue.model", model_name)
         logger.debug(f"loading model {model_name}")
         models[f] = fasttext.load_model(model_name)
         logger.debug("nb labels : {}".format(models[f].get_labels()))
