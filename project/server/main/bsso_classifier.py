@@ -35,6 +35,18 @@ def dedup_sort(x):
     y.sort()
     return y
 
+
+def get_words(x):
+    if isinstance(x, str):
+        return x
+    elif isinstance(x, dict):
+        return get_words([get_words(w) for w in list(x.values())])
+    elif isinstance(x, list):
+        return " ".join([get_words(w) for w in x])
+    else:
+        logger.debug("get_words is called on {type(x)} object when it should be a str, list or dict !")
+        return ""
+        
 def detect_field(elt):
     
     if len(models) < 5:
@@ -53,8 +65,7 @@ def detect_field(elt):
         current_words = elt.get(f) 
         if current_words is None:
             continue
-        if isinstance(current_words, list):
-            current_words = " ".join(current_words)
+        current_words = get_words(current_words)
         if not isinstance(current_words, str):
             continue
 
