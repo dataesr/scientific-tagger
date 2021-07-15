@@ -7,10 +7,10 @@ gunicorn==20.0.4
 pandas==0.25.3
 python-keystoneclient==4.0.0
 python-swiftclient==3.9.0
-redis==3.3.11
+redis==3.5.3
+rq==1.9.0
 regex==2017.4.5
 requests==2.20.0
-rq==1.1.0
 sklearn==0.0
 tokenizers==0.10.1
 Unidecode==1.0.22
