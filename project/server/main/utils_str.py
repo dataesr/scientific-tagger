@@ -15,3 +15,17 @@ def normalize(x):
     # remove double spaces
     y = re.sub(' +', ' ', y).strip()
     return y
+
+def get_str(x):
+    res = ''
+    if isinstance(x, dict):
+        for f in x:
+            if f not in ['lang']:
+                res += ' ' + get_str(x[f])
+    if isinstance(x, str):
+        res = x.strip()
+    if isinstance(x, list):
+        for e in x:
+            res += ' ' + get_str(e)
+    return res.strip()
+

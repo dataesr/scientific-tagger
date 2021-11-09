@@ -10,8 +10,11 @@ def sdg_classify(elems):
         if 'asjc_classification' not in e:
             continue
         asjc_list = [k['code_asjc'] for k in e['asjc_classification']]
-        ti_abs_kw = e.get('title', '')+' '+e.get('abstract', '')+' '+e.get('keywords', '')
-        ti_abs_kw = normalize(ti_abs_kw)
+        ti = get_str(e.get('title', ''))
+        abs = get_str(e.get('abstract', ''))
+        kw = get_str(e.get('keywords', ''))
+        ti_abs_kw = f'{ti} {abs} {kw}'
+        ti_abs_kw = normalize(ti_abs_kw.strip())
         calc = test_sdg(asjc_list, ti_abs_kw)
         e.update(calc)
     return elems
