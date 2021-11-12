@@ -1,6 +1,6 @@
 from project.server.main.asjc_classifier import asjc_classify 
 from project.server.main.sdg.sdg import test_sdg
-from project.server.main.utils_str import normalize
+from project.server.main.utils_str import normalize, get_str
 
 def sdg_classify(elems):
     elems = asjc_classify(elems)
