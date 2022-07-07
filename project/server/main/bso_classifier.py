@@ -27,7 +27,9 @@ def get_discipline_calc(title, journal_name, details = False):
     method = ""
     pf_tags = []
 
-    top_categ = get_categ_from_source(journal_name, 3)
+    top_categ = None
+    if journal_name:
+        top_categ = get_categ_from_source(journal_name, 3)
 
     if isinstance(title, str) and len(title)>0:
         prediction_pf = get_pf_label(title)
@@ -35,7 +37,7 @@ def get_discipline_calc(title, journal_name, details = False):
         method = "pf_classifier_confident"
         pf_tags = prediction_pf
 
-    if current_field == "unknown":
+    if current_field == "unknown" and journal_name:
         current_field = get_categ_from_source(journal_name)
         method = "category_from_journal"
 
@@ -57,11 +59,7 @@ def get_discipline_calc(title, journal_name, details = False):
 
 def bso_classify(elems, details = False):
     for e in elems:
-        if 'doi' in e and 'title' not in e or 'journal_name' not in e:
-            #e = enrich_metadata(e)
-            continue
-
-        if 'title' in e and 'journal_name' in e:
-            calc = get_discipline_calc(e['title'], e['journal_name'], details)
+        if 'title' in e:
+            calc = get_discipline_calc(e['title'], e.get('journal_name'), details)
             e.update(calc)
     return elems

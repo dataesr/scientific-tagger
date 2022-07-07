@@ -44,10 +44,6 @@ def get_pf_label(title, nb_top = 10):
 def pf_classify(elems, nb_top = 10):
     for e in elems:
         logger.debug(e)
-        if 'doi' in e and 'title' not in e or 'journal_name' not in e:
-            logger.debug("should enrich metadata")
-            continue
-
         if 'title' in e:
             pf_labels = get_pf_label(e['title'], nb_top)
             logger.debug(pf_labels)
