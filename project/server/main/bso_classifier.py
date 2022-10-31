@@ -24,9 +24,10 @@ def get_categ_from_source(source, top=1):
 
 def format_pf_tags(x):
     pf_tags_formatted = []
-    for ix, tag in enumerate(x[0]):
-        confidence = x[1][ix]
-        pf_tags_formatted.append({'tag': tag.replace('__label__', ''), 'confidence': confidence})
+    if len(x) == 2:
+        for ix, tag in enumerate(x[0]):
+            confidence = x[1][ix]
+            pf_tags_formatted.append({'tag': tag.replace('__label__', ''), 'confidence': confidence})
     return pf_tags_formatted
 
 def get_discipline_calc(title, journal_name, details = False):
