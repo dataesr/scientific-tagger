@@ -22,6 +22,13 @@ def get_categ_from_source(source, top=1):
         ans = 'unknown'
     return ans
 
+def format_pf_tags(x):
+    pf_tags_formatted = []
+    for ix, tag in enumerate(x[0]):
+        confidence = x[1][ix]
+        pf_tags_formatted.append({'tag': tag.replace('__label__', ''), 'confidence': confidence})
+    return pf_tags_formatted
+
 def get_discipline_calc(title, journal_name, details = False):
     current_field = "unknown"
     method = ""
@@ -51,7 +58,7 @@ def get_discipline_calc(title, journal_name, details = False):
     if details:
         ans.update( {
             "bso_classification_method": method,
-            "bso_classification_pf_tags": pf_tags,
+            "bso_classification_pf_tags": format_pf_tags(pf_tags),
             "bso_classification_journal_top_categ": top_categ
         } )
     return ans
