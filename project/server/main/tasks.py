@@ -6,6 +6,7 @@ from project.server.main.asjc_classifier import asjc_classify
 from project.server.main.sdg_classifier import sdg_classify
 from project.server.main.bsso_classifier import bsso_classify
 from project.server.main.classification_train import calibrate_pubmed
+from project.server.main.scibert import get_scibert_embeddings
 
 def create_task_classify(arg):
     classification = {}
@@ -39,3 +40,6 @@ def create_task_calibrate(arg):
     is_stratified = arg.get("stratified", True)
     sample_data_file = arg.get("sample_data_file")
     calibrate_pubmed(is_stratified, sample_data_file)
+
+def create_task_embeddings(arg):
+    return get_scibert_embeddings(arg.get('text'))

@@ -29,10 +29,6 @@ def get_aggregate(collection, pipeline, output):
             return None
     return None
 
-from project.server.main.logger import get_logger
-
-logger = get_logger(__name__)
-
 def getFilename_fromCd(cd):
     """
     Get filename from content-disposition

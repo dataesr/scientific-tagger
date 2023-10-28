@@ -2,7 +2,7 @@ import redis
 from rq import Queue, Connection
 from flask import render_template, Blueprint, jsonify, request, current_app
 
-from project.server.main.tasks import create_task_classify, create_task_calibrate
+from project.server.main.tasks import create_task_classify, create_task_calibrate, create_task_embeddings
 
 main_blueprint = Blueprint("main", __name__,)
 from project.server.main.logger import get_logger
@@ -32,6 +32,12 @@ def run_task_classify():
 def run_task_classify_one():
     args = request.get_json(force=True)
     response_object = create_task_classify(args)
+    return jsonify(response_object), 202
+
+@main_blueprint.route("/embeddings", methods=["POST"])
+def run_task_embeddings():
+    args = request.get_json(force=True)
+    response_object = create_task_embeddings(args)
     return jsonify(response_object), 202
 
 
