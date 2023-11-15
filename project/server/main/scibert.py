@@ -1,5 +1,6 @@
 import os
 import spacy
+from sklearn import preprocessing
 
 from project.server.main.logger import get_logger
 
