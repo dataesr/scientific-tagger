@@ -1,6 +1,7 @@
 import os
 import spacy
 from sklearn import preprocessing
+from sentence_transformers import SentenceTransformer, util
 
 from project.server.main.logger import get_logger
 
@@ -24,9 +25,12 @@ def get_scibert_embeddings(text, normalize=True):
     tokvecs = doc._.trf_data.tensors[-1]
     if normalize:
         tokvecs = preprocessing.normalize(tokvecs, norm='l2')
-    assert(len(tokvecs[0]) == 768)
+    tokvecs = tokvecs[0]
+    assert(len(tokvecs) == 768)
     # converting to float for json serialization
-    return { 'embeddings': [float(e) for e in tokvecs[0]] }
+    return { 'embeddings': [float(e) for e in tokvecs] }
 
 def get_multilingual_embeddings(text, normalize=True):
-    return model_multilingual.encode(text, normalize_embeddings=normalize)
+    tokvecs = model_multilingual.encode(text, normalize_embeddings=normalize)
+    assert(len(tokvecs) == 512)
+    return { 'embeddings': [float(e) for e in tokvecs] }
