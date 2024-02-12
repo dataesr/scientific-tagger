@@ -1,6 +1,6 @@
 # Scientific tagger
 
-![Build](https://img.shields.io/github/workflow/status/dataesr/scientific_tagger/Build)
+![Build](https://img.shields.io/github/workflow/status/dataesr/scientific_tagger/build)
 ![Release](https://img.shields.io/github/v/release/dataesr/scientific_tagger)
 ![License](https://img.shields.io/github/license/dataesr/scientific_tagger)
 
