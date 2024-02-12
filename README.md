@@ -19,10 +19,6 @@ docker compose pull && docker compose down && docker system prune -f && docker c
 In your browser, you now have :
 - scientific-tagger : http://localhost:5004/
 
-## Deploy it on kubernetes
-```shell
-kubectl apply -k k8s
-```
 
 ## Release
 It uses [semver](https://semver.org/).
