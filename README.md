@@ -13,7 +13,7 @@ The scientific taggers aims at proposing subject classification for scholarly pu
 ```shell
 git clone git@github.com:dataesr/scientific-tagger.git
 cd scientific-tagger
-docker-compose pull && docker-compose up
+docker compose pull && docker compose down && docker system prune -f && docker compose up
 ```
 
 In your browser, you now have :
